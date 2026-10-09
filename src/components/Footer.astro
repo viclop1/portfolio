@@ -1,0 +1,7 @@
+---
+import { getDict, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+  <footer><span>© 2026 Víctor López Rodríguez</span><span><Fragment set:html={t.foot} /></span></footer>

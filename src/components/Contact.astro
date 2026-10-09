@@ -1,0 +1,23 @@
+---
+import { EMAIL } from '../data/site.js';
+import { getDict, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+  <!-- CONTACT -->
+  <section class="view" id="v-contact" data-view="contact" hidden>
+    <div class="vhead">
+      <span class="route"><span class="m">POST</span> /contact</span>
+      <h2><Fragment set:html={t.ct_h} /></h2>
+      <p class="pintro"><Fragment set:html={t.ct_p} /></p>
+    </div>
+    <div class="clinks">
+      <span class="mail">{EMAIL}</span>
+      <div class="row2">
+        <button class="btn primary js-copy" type="button"><Fragment set:html={t.c_copy} /></button>
+        <a class="btn" href="https://www.linkedin.com/in/victor-lopez-rodriguez/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/viclop1" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>

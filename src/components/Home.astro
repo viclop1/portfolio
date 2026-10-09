@@ -1,0 +1,43 @@
+---
+import { EMAIL } from '../data/site.js';
+import { getDict, type Lang } from '../i18n';
+import portrait from '../assets/portrait.jpg';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+  <!-- HOME -->
+  <section class="view" id="v-home" data-view="home">
+    <div class="hero">
+      <div>
+        <span class="eyebrow"><span class="dot"></span><span><Fragment set:html={t.h_eyebrow} /></span></span>
+        <h1><span>Víctor</span><span>López</span><span>Rodríguez</span></h1>
+        <p class="role"><Fragment set:html={t.h_role} /></p>
+        <p class="lede"><Fragment set:html={t.h_lede} /></p>
+        <div class="hstack" aria-label="Core stack"><span>Node.js</span><span>NestJS</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>AWS</span></div>
+        <div class="cta">
+          <a class="btn primary" href="#career"><Fragment set:html={t.h_cta1} /></a>
+          <a class="btn" href="#hoopline"><Fragment set:html={t.h_cta2} /></a>
+        </div>
+        <p class="uptime"><span><Fragment set:html={t.h_uptime} /></span> <b id="uptime">11+ years</b></p>
+      </div>
+      <figure class="portrait">
+        <img src={portrait.src} alt="Víctor López Rodríguez" width="440" height="550">
+      </figure>
+    </div>
+    <div class="hcards">
+      <a class="card hc" href="#career"><span class="rt">/career</span><h3><Fragment set:html={t.hc1h} /></h3><p><Fragment set:html={t.hc1p} /></p><span class="go"><Fragment set:html={t.hc_open} /></span></a>
+      <a class="card hc" href="#hoopline"><span class="rt">/hoopline</span><h3><Fragment set:html={t.hc2h} /></h3><p><Fragment set:html={t.hc2p} /></p><span class="go"><Fragment set:html={t.hc_open} /></span></a>
+      <a class="card hc" href="#about"><span class="rt">/about</span><h3><Fragment set:html={t.hc3h} /></h3><p><Fragment set:html={t.hc3p} /></p><span class="go"><Fragment set:html={t.hc_open} /></span></a>
+    </div>
+    <div class="band">
+      <h2><Fragment set:html={t.ct_h} /></h2>
+      <div class="clinks">
+        <span class="mail">{EMAIL}</span>
+        <div class="row2">
+          <button class="btn primary js-copy" type="button"><Fragment set:html={t.c_copy} /></button>
+          <a class="btn" href="#contact"><Fragment set:html={t.nav_contact} /></a>
+        </div>
+      </div>
+    </div>
+  </section>

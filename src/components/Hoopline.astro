@@ -1,0 +1,109 @@
+---
+import { getDict, type Lang } from '../i18n';
+import { SCREENS, SCREEN_LANGS } from '../data/screenshots.js';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+  <!-- HOOPLINE -->
+  <section class="view" id="v-hoopline" data-view="hoopline" hidden>
+    <div class="vhead">
+      <span class="route"><span class="m">GET</span> /hoopline</span>
+      <h2>Hoopline GM</h2>
+      <p class="tagline"><Fragment set:html={t.ho_tag} /></p>
+      <div class="badges"><span class="badge ok"><Fragment set:html={t.ho_st1} /></span><span class="badge"><Fragment set:html={t.ho_st2} /></span></div>
+      <div class="hlinks">
+        <a class="btn primary" href="https://hooplinegm.com" target="_blank" rel="noopener"><Fragment set:html={t.ho_site} /></a>
+      </div>
+    </div>
+    <div class="subnav" role="tablist" aria-label="Hoopline">
+      <a role="tab" href="#hoopline-overview" data-s="overview" aria-selected="true"><Fragment set:html={t.sb_overview} /></a>
+      <a role="tab" href="#hoopline-architecture" data-s="architecture" aria-selected="false"><Fragment set:html={t.sb_arch} /></a>
+      <a role="tab" href="#hoopline-decisions" data-s="decisions" aria-selected="false"><Fragment set:html={t.sb_dec} /></a>
+      <a role="tab" href="#hoopline-screens" data-s="screens" aria-selected="false"><Fragment set:html={t.sb_screens} /></a>
+    </div>
+
+    <div class="pane" data-pane="overview">
+      <div class="s3" role="tablist" aria-label="Hoopline">
+        <button type="button" role="tab" class="s3b" data-k="why" aria-selected="true"><Fragment set:html={t.ov_h1} /></button>
+        <button type="button" role="tab" class="s3b" data-k="what" aria-selected="false"><Fragment set:html={t.ov_h2} /></button>
+        <button type="button" role="tab" class="s3b" data-k="built" aria-selected="false"><Fragment set:html={t.ov_h3} /></button>
+      </div>
+      <div class="s3p" data-p="why">
+        <p class="big"><Fragment set:html={t.ov_p1} /></p>
+        <p class="sub"><Fragment set:html={t.ov_why2} /></p>
+      </div>
+      <div class="s3p" data-p="what" hidden>
+        <p class="big"><Fragment set:html={t.ov_p2} /></p>
+        <ul class="ticks">
+          <li><Fragment set:html={t.ov_f1} /></li>
+          <li><Fragment set:html={t.ov_f2} /></li>
+          <li><Fragment set:html={t.ov_f3} /></li>
+          <li><Fragment set:html={t.ov_f4} /></li>
+        </ul>
+      </div>
+      <div class="s3p" data-p="built" hidden>
+        <p class="big"><Fragment set:html={t.ov_p3} /></p>
+        <div class="bstats" id="bstats"></div>
+        <ul class="ticks">
+          <li><Fragment set:html={t.hx_f1} /></li>
+          <li><Fragment set:html={t.hx_f4} /></li>
+        </ul>
+      </div>
+      <div class="blk bw"><h3><Fragment set:html={t.ov_h4} /></h3>
+        <div class="tags"><span class="tag">Flutter · Dart</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Edge Functions</span><span class="tag">RevenueCat</span><span class="tag">AdMob</span><span class="tag">PostHog</span><span class="tag">Resend</span><span class="tag">Firebase Cloud Messaging</span><span class="tag">Codemagic</span><span class="tag">Cloudflare</span></div>
+      </div>
+      <h3 class="subh"><Fragment set:html={t.ov_h5} /></h3>
+      <p class="pintro"><Fragment set:html={t.ov_codep} /></p>
+      <div class="tour">
+        <div class="tlist" id="tlist" role="tablist" aria-orientation="vertical"></div>
+        <div class="tdetail" id="tdetail" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="architecture" hidden>
+      <p class="pintro"><Fragment set:html={t.ar_p} /></p>
+      <div class="arch">
+        <div class="flows" id="flows" role="group" aria-label="Flows"></div>
+        <div class="diagram" id="diagram"><svg id="svg" viewBox="0 0 1000 540" role="img" aria-label="Architecture of Hoopline GM"></svg></div>
+        <div class="stepper">
+          <div class="stepinfo" id="stepinfo" aria-live="polite"></div>
+          <div class="ctrl">
+            <button class="ibtn" id="prev" type="button" aria-label="Previous step">←</button>
+            <button class="ibtn" id="next" type="button" aria-label="Next step">→</button>
+            <button class="ibtn" id="play" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="decisions" hidden>
+      <p class="pintro"><Fragment set:html={t.d_p} /></p>
+      <div class="cards">
+        <article class="card"><span class="tg">01</span><h3><Fragment set:html={t.d1h} /></h3><p><Fragment set:html={t.d1p} /></p></article>
+        <article class="card"><span class="tg">02</span><h3><Fragment set:html={t.d2h} /></h3><p><Fragment set:html={t.d2p} /></p></article>
+        <article class="card"><span class="tg">03</span><h3><Fragment set:html={t.d3h} /></h3><p><Fragment set:html={t.d3p} /></p></article>
+        <article class="card"><span class="tg">04</span><h3><Fragment set:html={t.d4h} /></h3><p><Fragment set:html={t.d4p} /></p></article>
+        <article class="card"><span class="tg">05</span><h3><Fragment set:html={t.d5h} /></h3><p><Fragment set:html={t.d5p} /></p></article>
+        <article class="card"><span class="tg">06</span><h3><Fragment set:html={t.d6h} /></h3><p><Fragment set:html={t.d6p} /></p></article>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="screens" hidden>
+      <p class="pintro"><Fragment set:html={t.sc_p} /></p>
+      <div class="shots-bar">
+        <div class="shots-lang" role="group" aria-label={t.sc_lang}>
+          {SCREEN_LANGS.map((l) => <button type="button" class="slang" data-l={l} aria-pressed={l === lang ? 'true' : 'false'}>{l.toUpperCase()}</button>)}
+        </div>
+      </div>
+      {SCREEN_LANGS.map((l) => (
+        <div class="shots" data-l={l} hidden={l !== lang}>
+          {SCREENS.map((sc, i) => (
+            <figure class="shot">
+              <img src={`/screens/${l}/${sc.id}.webp`} alt={sc.alt[lang === 'es' ? 1 : 0]} width="600" height="1300" loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>

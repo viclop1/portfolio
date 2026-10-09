@@ -1,0 +1,55 @@
+---
+import { getDict, type Lang } from '../i18n';
+import avatar from '../assets/avatar.jpg';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+  <!-- ABOUT -->
+  <section class="view" id="v-about" data-view="about" hidden>
+    <div class="vhead">
+      <span class="route"><span class="m">GET</span> /about</span>
+      <h2><Fragment set:html={t.a_h} /></h2>
+    </div>
+    <div class="subnav" role="tablist" aria-label="About">
+      <a role="tab" href="#about-story" data-s="story" aria-selected="true"><Fragment set:html={t.sb_story} /></a>
+      <a role="tab" href="#about-how" data-s="how" aria-selected="false"><Fragment set:html={t.sb_how} /></a>
+      <a role="tab" href="#about-off" data-s="off" aria-selected="false"><Fragment set:html={t.sb_off} /></a>
+    </div>
+
+    <div class="pane" data-pane="story">
+      <div class="about2">
+        <img class="avatar" src={avatar.src} alt="Víctor López Rodríguez" width="168" height="168">
+        <div>
+          <p><Fragment set:html={t.a_p1} /></p>
+          <p><Fragment set:html={t.a_p2} /></p>
+          <p><Fragment set:html={t.a_p3} /></p>
+        </div>
+        <div class="facts">
+          <div class="fact"><span><Fragment set:html={t.fk_exp} /></span><span><Fragment set:html={t.fv_exp} /></span></div>
+          <div class="fact"><span><Fragment set:html={t.fk_cur} /></span><span><Fragment set:html={t.fv_cur} /></span></div>
+          <div class="fact"><span><Fragment set:html={t.fk_loc} /></span><span><Fragment set:html={t.fv_loc} /></span></div>
+          <div class="fact"><span><Fragment set:html={t.fk_lang} /></span><span><Fragment set:html={t.fv_lang} /></span></div>
+          <div class="fact"><span><Fragment set:html={t.fk_lead} /></span><span><Fragment set:html={t.fv_lead} /></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="how" hidden>
+      <p class="pintro"><Fragment set:html={t.te_p} /></p>
+      <div class="term">
+        <div class="thead"><span>~/victor $ npm test</span><button class="btn" id="rerun" type="button"><Fragment set:html={t.te_run} /></button></div>
+        <div class="tout" id="tout"></div>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="off" hidden>
+      <p class="pintro"><Fragment set:html={t.of_p} /></p>
+      <div class="cards offc">
+        <article class="card"><div class="ill ill-ball"><svg viewBox="0 0 220 96" role="img" aria-label="Basketball and a green jersey number 0"><g class="jersey"><path d="M62 14 L80 8 Q93 18 106 8 L124 14 L134 30 L120 36 L120 88 L52 88 L52 36 L38 30 Z" fill="#0B7A3E" stroke="#F4F1E8" stroke-width="2.5" stroke-linejoin="round"/><path d="M80 8 Q93 18 106 8" fill="none" stroke="#F4F1E8" stroke-width="2.5"/><ellipse cx="86" cy="54" rx="11" ry="16" fill="none" stroke="#F4F1E8" stroke-width="7"/></g><g class="ball"><circle cx="170" cy="62" r="22" fill="#F28A2E"/><path d="M148 62 H192 M170 40 V84 M155 47 Q170 62 155 77 M185 47 Q170 62 185 77" fill="none" stroke="#3A1A00" stroke-width="2"/></g><ellipse class="shadow" cx="170" cy="90" rx="16" ry="3" fill="currentColor" opacity=".18"/></svg></div><span class="tg">01</span><h3><Fragment set:html={t.of1h} /></h3><p><Fragment set:html={t.of1p} /></p></article>
+        <article class="card"><div class="ill"><svg viewBox="0 0 220 96" role="img" aria-label="Graffiti tags: rap, jazz, soul"><rect width="220" height="96" rx="10" fill="#14232F"/><g stroke="#24394A" stroke-width="1"><path d="M0 24H220M0 48H220M0 72H220"/><path d="M40 0V24M120 0V24M180 0V24M10 24V48M80 24V48M150 24V48M200 24V48M40 48V72M120 48V72M180 48V72M10 72V96M80 72V96M150 72V96M200 72V96"/></g><g style="font-family:var(--f-display)" font-weight="800" stroke-linejoin="round" paint-order="stroke"><text x="10" y="40" font-size="34" fill="#FF9A4D" stroke="#0A1620" stroke-width="5" transform="rotate(-6 10 40)">RAP</text><text x="82" y="58" font-size="34" fill="#38D6C8" stroke="#0A1620" stroke-width="5" transform="rotate(4 82 58)">JAZZ</text><text x="46" y="88" font-size="30" fill="#FF5C8A" stroke="#0A1620" stroke-width="5" transform="rotate(-3 46 88)">SOUL</text></g><g fill="#FF9A4D"><rect x="20" y="42" width="3" height="12" rx="1.5"/><rect x="44" y="40" width="3" height="7" rx="1.5"/></g><g fill="#38D6C8"><rect x="96" y="62" width="3" height="14" rx="1.5"/><rect x="134" y="64" width="3" height="8" rx="1.5"/></g><g fill="#FF5C8A"><rect x="60" y="91" width="3" height="5" rx="1.5"/></g></svg></div><span class="tg">02</span><h3><Fragment set:html={t.of2h} /></h3><p><Fragment set:html={t.of2p} /></p><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></article>
+        <article class="card"><div class="ill ill-gym"><svg viewBox="0 0 220 96" role="img" aria-label="Dumbbell"><g class="lift"><rect x="70" y="44" width="80" height="8" rx="4" fill="currentColor" opacity=".55"/><rect x="52" y="26" width="14" height="44" rx="4" fill="var(--accent)"/><rect x="38" y="33" width="12" height="30" rx="3" fill="var(--accent)" opacity=".7"/><rect x="154" y="26" width="14" height="44" rx="4" fill="var(--accent)"/><rect x="170" y="33" width="12" height="30" rx="3" fill="var(--accent)" opacity=".7"/></g><ellipse cx="110" cy="88" rx="52" ry="3" fill="currentColor" opacity=".15"/></svg></div><span class="tg">03</span><h3><Fragment set:html={t.of3h} /></h3><p><Fragment set:html={t.of3p} /></p></article>
+        <article class="card"><div class="ill ill-fam"><svg viewBox="0 0 220 96" role="img" aria-label="A family holding hands"><g fill="var(--accent)"><circle cx="76" cy="26" r="9"/><path d="M62 78 V50 Q62 38 76 38 Q90 38 90 50 V78 Z"/></g><g fill="var(--flow)"><circle cx="144" cy="26" r="9"/><path d="M130 78 V50 Q130 38 144 38 Q158 38 158 50 V78 Z"/></g><g fill="currentColor" opacity=".75"><circle cx="110" cy="50" r="6.5"/><path d="M100 78 V62 Q100 55 110 55 Q120 55 120 62 V78 Z"/></g><path d="M90 56 L101 62 M130 56 L119 62" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".5"/><path class="heart" d="M110 24 C104 16 94 20 100 28 L110 38 L120 28 C126 20 116 16 110 24 Z" fill="#FF5C8A"/></svg></div><span class="tg">04</span><h3><Fragment set:html={t.of4h} /></h3><p><Fragment set:html={t.of4p} /></p></article>
+      </div>
+    </div>
+  </section>

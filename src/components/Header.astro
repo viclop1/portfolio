@@ -1,0 +1,30 @@
+---
+import { getDict, type Lang } from '../i18n';
+import avatar from '../assets/avatar.jpg';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+<a class="skip" href="#top"><Fragment set:html={t.skip} /></a>
+<div id="progress"></div>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#home"><img src={avatar.src} alt="" width="30" height="30"><span>Víctor López</span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#home" data-v="home"><Fragment set:html={t.nav_home} /></a>
+      <a href="#career" data-v="career"><Fragment set:html={t.nav_career} /></a>
+      <a href="#hoopline" data-v="hoopline"><Fragment set:html={t.nav_hoop} /></a>
+      <a href="#about" data-v="about"><Fragment set:html={t.nav_about} /></a>
+      <a href="#contact" data-v="contact"><Fragment set:html={t.nav_contact} /></a>
+    </nav>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Language">
+        <a id="l-en" href="/en/" hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+        <a id="l-es" href="/es/" hreflang="es" lang="es" aria-current={lang === 'es' ? 'true' : undefined}>ES</a>
+      </div>
+      <button class="ibtn" id="theme" type="button"></button>
+      <button class="ibtn" id="palbtn" type="button" aria-label="Command menu"><span class="lbl"><Fragment set:html={t.pal_btn} /></span> <kbd id="kbd">Ctrl K</kbd></button>
+      <button class="ibtn burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>

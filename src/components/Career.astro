@@ -1,0 +1,54 @@
+---
+import { getDict, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+  <!-- CAREER -->
+  <section class="view" id="v-career" data-view="career" hidden>
+    <div class="vhead">
+      <span class="route"><span class="m">GET</span> /career</span>
+      <h2><Fragment set:html={t.cr_h} /></h2>
+    </div>
+    <div class="subnav" role="tablist" aria-label="Career">
+      <a role="tab" href="#career-timeline" data-s="timeline" aria-selected="true"><Fragment set:html={t.sb_timeline} /></a>
+      <a role="tab" href="#career-highlights" data-s="highlights" aria-selected="false"><Fragment set:html={t.sb_highlights} /></a>
+      <a role="tab" href="#career-stack" data-s="stack" aria-selected="false"><Fragment set:html={t.sb_stack} /></a>
+    </div>
+
+    <div class="pane" data-pane="timeline">
+      <p class="pintro"><Fragment set:html={t.t_p} /></p>
+      <div class="trace">
+        <div class="axis"><div></div><div class="track" id="axis"></div></div>
+        <div id="rows"></div>
+        <div class="scrub">
+          <output id="when" for="range">now</output>
+          <input type="range" id="range" aria-label="Career playhead" min="0" max="1" step="0.001" value="1">
+        </div>
+        <div class="detail" id="detail" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="highlights" hidden>
+      <p class="pintro"><Fragment set:html={t.w_h} /></p>
+      <div class="cards">
+        <article class="card"><span class="tg"><Fragment set:html={t.w1g} /></span><h3><Fragment set:html={t.w1h} /></h3><p><Fragment set:html={t.w1p} /></p><div class="tags"><span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">MongoDB</span></div></article>
+        <article class="card"><span class="tg"><Fragment set:html={t.w2g} /></span><h3><Fragment set:html={t.w2h} /></h3><p><Fragment set:html={t.w2p} /></p><div class="tags"><span class="tag">NestJS</span><span class="tag">PostgreSQL</span><span class="tag">Jest</span><span class="tag">Jenkins</span></div></article>
+        <article class="card"><span class="tg"><Fragment set:html={t.w3g} /></span><h3><Fragment set:html={t.w3h} /></h3><p><Fragment set:html={t.w3p} /></p><div class="tags"><span class="tag">Stripe</span><span class="tag">PayPal</span><span class="tag">Webhooks</span></div></article>
+        <article class="card"><span class="tg"><Fragment set:html={t.w4g} /></span><h3><Fragment set:html={t.w4h} /></h3><p><Fragment set:html={t.w4p} /></p><div class="tags"><span class="tag">NestJS</span><span class="tag">PostgreSQL</span><span class="tag">Jest</span><span class="tag">Jenkins</span><span class="tag">MCP</span></div></article>
+        <article class="card"><span class="tg"><Fragment set:html={t.w5g} /></span><h3><Fragment set:html={t.w5h} /></h3><p><Fragment set:html={t.w5p} /></p><div class="tags"><span class="tag">Jest</span><span class="tag">E2E</span></div></article>
+        <article class="card"><span class="tg"><Fragment set:html={t.w6g} /></span><h3><Fragment set:html={t.w6h} /></h3><p><Fragment set:html={t.w6p} /></p><div class="tags"><span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">Node.js</span></div></article>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="stack" hidden>
+      <div class="sgroups">
+        <div class="sg"><h3><Fragment set:html={t.s1} /></h3><div class="schips"><span class="chip core"><b>Node.js</b><i>2015 →</i></span><span class="chip core"><b>TypeScript</b><i>CrowdFarming</i></span><span class="chip core"><b>NestJS</b><i>CrowdFarming</i></span><span class="chip"><b>JavaScript</b><i>2015 →</i></span><span class="chip"><b>Python</b></span></div></div>
+        <div class="sg"><h3><Fragment set:html={t.s2} /></h3><div class="schips"><span class="chip"><b>PostgreSQL</b><i>CrowdFarming · Hoopline</i></span><span class="chip"><b>MongoDB</b><i>CrowdFarming</i></span><span class="chip"><b>Redis</b><i>CrowdFarming</i></span><span class="chip"><b>Elasticsearch</b></span><span class="chip"><b>SQL</b><i>2015 →</i></span></div></div>
+        <div class="sg"><h3><Fragment set:html={t.s3} /></h3><div class="schips"><span class="chip"><b>AWS</b><i>CrowdFarming</i></span><span class="chip"><b>Microservices</b><i>CrowdFarming</i></span><span class="chip"><b>Monorepo</b><i>CrowdFarming</i></span><span class="chip"><b>Supabase</b><i>Hoopline</i></span></div></div>
+        <div class="sg"><h3><Fragment set:html={t.s4} /></h3><div class="schips"><span class="chip"><b>Jest</b><i>CrowdFarming</i></span><span class="chip"><b>E2E testing</b><i>CrowdFarming</i></span><span class="chip"><b>Stripe · PayPal</b><i>CrowdFarming</i></span><span class="chip"><b>RevenueCat</b><i>Hoopline</i></span></div></div>
+        <div class="sg"><h3><Fragment set:html={t.s5} /></h3><div class="schips"><span class="chip"><b>Flutter · Dart</b><i>Hoopline</i></span><span class="chip"><b>Codemagic</b><i>Hoopline</i></span><span class="chip"><b>Jenkins</b><i>CrowdFarming</i></span><span class="chip"><b>App Store · Google Play</b><i>Hoopline</i></span><span class="chip"><b>PostHog</b><i>Hoopline</i></span></div></div>
+        <div class="sg"><h3><Fragment set:html={t.s6} /></h3><div class="schips"><span class="chip"><b><Fragment set:html={t.s6a} /></b></span><span class="chip"><b><Fragment set:html={t.s6b} /></b></span><span class="chip"><b><Fragment set:html={t.s6c} /></b></span><span class="chip"><b><Fragment set:html={t.s6d} /></b></span></div></div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,12 @@
+---
+import { getDict, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+<div class="pal" id="pal" hidden>
+  <div class="pbox" role="dialog" aria-modal="true" aria-label="Command menu">
+    <input id="pin" type="text" autocomplete="off" spellcheck="false" aria-label="Search commands">
+    <div class="plist" id="plist"></div>
+  </div>
+</div>
