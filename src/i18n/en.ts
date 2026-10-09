@@ -7,7 +7,7 @@ const dict = {
   "nav_about": "About",
   "nav_contact": "Contact",
   "pal_btn": "Menu",
-  "h_eyebrow": "Open to new opportunities · Madrid",
+  "h_eyebrow": "Madrid · Node.js, TypeScript, NestJS",
   "h_role": "Senior Backend &amp; AI Engineer",
   "h_lede": "I build backend systems that are maintainable, scalable and pragmatic, and I like owning a problem from the first requirement to production. I also shipped a whole product on my own: Hoopline GM, on the App Store.",
   "h_cta1": "See my career",
@@ -124,7 +124,7 @@ const dict = {
   "of3p": "Gym, running and padel. Anything that keeps me moving.",
   "of4h": "Family",
   "of4p": "Weekends are for family. That is where most of my time away from the keyboard goes.",
-  "ct_p": "I'm open to backend and AI engineering roles. Email is the quickest way to reach me.",
+  "ct_p": "Email is the quickest way to reach me, whether it is a backend problem, an idea or a chat about Hoopline.",
   "foot": "Built to be explored. Try Ctrl K."
 };
 export default dict;

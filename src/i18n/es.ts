@@ -9,7 +9,7 @@ const dict: Record<keyof typeof en, string> = {
   "nav_about": "Sobre mí",
   "nav_contact": "Contacto",
   "pal_btn": "Menú",
-  "h_eyebrow": "Abierto a nuevas oportunidades · Madrid",
+  "h_eyebrow": "Madrid · Node.js, TypeScript, NestJS",
   "h_role": "Ingeniero Senior de Backend e IA",
   "h_lede": "Construyo sistemas backend mantenibles, escalables y pragmáticos, y me gusta hacerme cargo de un problema desde el primer requisito hasta producción. También lancé yo solo un producto entero: Hoopline GM, en la App Store.",
   "h_cta1": "Ver mi trayectoria",
@@ -126,7 +126,7 @@ const dict: Record<keyof typeof en, string> = {
   "of3p": "Gimnasio, correr y pádel. Todo lo que me mantenga en movimiento.",
   "of4h": "Familia",
   "of4p": "Los fines de semana son para la familia. Ahí se va la mayor parte de mi tiempo lejos del teclado.",
-  "ct_p": "Estoy abierto a puestos de ingeniería backend y de IA. El email es la forma más rápida de escribirme.",
+  "ct_p": "El email es la forma más rápida de escribirme, ya sea por un problema backend, una idea o una charla sobre Hoopline.",
   "foot": "Hecho para explorarlo. Prueba Ctrl K."
 };
 export default dict;

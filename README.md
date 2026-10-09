@@ -66,4 +66,3 @@ Static files: `public/og.png` (share image, 1200x630), `robots.txt`, `sitemap.xm
 ## Not done yet
 
 - Measurable results in the Career section (waiting for the numbers).
-- Switch the contact email in `src/data/site.js` to hola@vlopez.dev once Email Routing works.
