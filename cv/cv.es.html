@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Víctor López Rodríguez · CV</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Figtree:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+body{width:794px;height:1123px;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-family:'Figtree',system-ui,sans-serif}
+.page{width:794px;height:1123px;display:flex;flex-direction:row-reverse;background:#fff;overflow:hidden}
+aside{width:268px;background:#06141F;color:#EAF4FA;padding:38px 26px;display:flex;flex-direction:column;gap:22px}
+main{flex:1;padding:40px 36px 34px 34px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.sh{font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#FF9A4D;margin:0 0 8px}
+.chip{font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;border:1px solid #2A5873;border-radius:5px;padding:2px 7px;color:#EAF4FA}
+.chip.hi{border-color:#FF9A4D;color:#FF9A4D}
+.mono{font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;overflow-wrap:anywhere}
+.job{display:flex;flex-direction:column;gap:3px}
+.jt{font-family:'Bricolage Grotesque',Arial,sans-serif;font-weight:800;font-size:13.5px;color:#0B2233;margin:0}
+.jm{font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;color:#9A4A00;margin:0}
+.jb{margin:4px 0 0;padding-left:14px;font-size:11px;line-height:1.55;color:#26404F}
+.jb li{margin-bottom:2px}
+h1{margin:0;font-family:'Bricolage Grotesque',Arial,sans-serif;font-weight:800;font-size:37px;line-height:1.02;color:#06141F;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="page">
+<main>
+  <header>
+    <h1>Víctor López<br>Rodríguez</h1>
+    <p style="margin:8px 0 0;font-family:'DM Mono',ui-monospace,monospace;font-size:12px;color:#B85F00">Ingeniero Senior de Backend e IA</p>
+  </header>
+  <p style="margin:0;font-size:11.5px;line-height:1.55;color:#26404F">Construyo sistemas backend mantenibles, escalables y pragmáticos, y me gusta hacerme cargo de un problema desde el primer requisito hasta producción. He liderado equipos, mentorizado a desarrolladores e introducido testing automático allí donde he trabajado. También lancé yo solo un producto entero, Hoopline GM, en la App Store.</p>
+  <section style="display:flex;flex-direction:column;gap:15px">
+    <p class="sh" style="color:#B85F00;margin:0">Experiencia</p>
+    <div class="job"><p class="jt">Backend developer · CrowdFarming</p><p class="jm">nov 2020 – actualidad · España</p><ul class="jb"><li>Lideré la parte backend de una plataforma e-commerce completa, construida desde cero, incluidos el carrito, el checkout y los flujos de pago.</li><li>Diseñé un modelo de ventas flexible que unificó distintos modos de venta y simplificó el flujo interno de la empresa.</li><li>Implementé PayPal dentro de Stripe, una funcionalidad en beta y sin documentación: flujos de pago, webhooks y suscripciones.</li><li>Contribuí a un MCP interno que ayuda a otros equipos a publicar proyectos, configurar las ventas en la web, comprobar el stock y gestionar los envíos.</li><li>Promuevo el testing automático (Jest, E2E), mentorizo a desarrolladores nuevos y participo en las decisiones técnicas.</li></ul><p class="jm" style="color:#4D6B7F">Node.js · TypeScript · NestJS · PostgreSQL · MongoDB · Redis · AWS</p></div>
+<div class="job"><p class="jt">Technical Project Lead · SNIPPET</p><p class="jm">ene 2020 – oct 2020 · Madrid</p><ul class="jb"><li>Responsable de la dirección técnica, la planificación y la entrega de Myme, una plataforma de campañas de vídeo personalizadas, coordinando a varios equipos.</li><li>Tomé las decisiones técnicas clave y evalué la viabilidad con el equipo de negocio.</li></ul></div>
+<div class="job"><p class="jt">Full Stack Developer · SNIPPET</p><p class="jm">may 2019 – ene 2020 · Madrid</p><ul class="jb"><li>Funcionalidades en todo el stack, desde servicios backend y APIs hasta frontend, como parte del equipo de producto.</li></ul></div>
+<div class="job"><p class="jt">Web developer · Ruybesa</p><p class="jm">jul 2017 – mar 2019 · Madrid</p><ul class="jb"><li>Sistemas para la distribución a gran escala de contenido digital a dispositivos instalados en grandes clientes, incluida la programación y entrega de campañas publicitarias.</li></ul></div>
+<div class="job"><p class="jt">Junior developer · Aerín Sistemas</p><p class="jm">sep 2015 – jul 2017 · Madrid</p><ul class="jb"><li>Herramientas en tiempo real, aplicaciones de monitorización y soluciones de base de datos con Python/Django, Node.js y AngularJS.</li></ul></div>
+
+  </section>
+  <section style="margin-top:auto;border:1px solid #F0C9A3;background:#FFF6EC;border-radius:10px;padding:11px 14px;display:flex;flex-direction:column;gap:3px">
+    <p style="margin:0;font-family:'Bricolage Grotesque',Arial,sans-serif;font-weight:800;font-size:13px;color:#06141F">Hoopline GM · proyecto en solitario · hooplinegm.com</p>
+    <p style="margin:0;font-size:11px;line-height:1.5;color:#26404F">Mánager de baloncesto gratuito, diseñado, construido y publicado en solitario. App en Flutter sobre Supabase (PostgreSQL con la lógica del juego en SQL, Edge Functions), compras con RevenueCat y CI/CD en Codemagic. Disponible en iOS, Android en pruebas cerradas. 130+ migraciones, 70+ ficheros de test SQL, 4 idiomas.</p>
+  </section>
+</main>
+<aside>
+  <img src="../src/assets/portrait.jpg" alt="Víctor López" style="width:100%;height:230px;object-fit:cover;object-position:50% 20%;border-radius:14px;border:1px solid #1F4660">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <p class="sh">Contacto</p>
+    <a class="mono" href="mailto:hola@vlopez.dev">hola@vlopez.dev</a>
+    <a class="mono" href="https://vlopez.dev">vlopez.dev</a>
+    <a class="mono" href="https://www.linkedin.com/in/victor-lopez-rodriguez/">linkedin.com/in/victor-lopez-rodriguez</a>
+    <a class="mono" href="https://github.com/viclop1">github.com/viclop1</a>
+    <span style="font-size:11px;color:#8FB0C4">Madrid, España</span>
+  </div>
+  <div>
+    <p class="sh">Stack principal</p>
+    <div style="display:flex;flex-wrap:wrap;gap:5px">
+      <span class="chip hi">Node.js</span><span class="chip hi">TypeScript</span><span class="chip hi">NestJS</span>
+      <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span><span class="chip">Elasticsearch</span><span class="chip">AWS</span><span class="chip">Jest</span><span class="chip">Jenkins</span><span class="chip">Python</span><span class="chip">JavaScript</span>
+    </div>
+  </div>
+  <div>
+    <p class="sh">Además</p>
+    <div style="display:flex;flex-wrap:wrap;gap:5px">
+      <span class="chip">Flutter</span><span class="chip">Supabase</span><span class="chip">Deno</span><span class="chip">RevenueCat</span><span class="chip">Codemagic</span>
+    </div>
+  </div>
+  <div>
+    <p class="sh">Idiomas</p>
+    <div style="font-size:11px;line-height:1.7">Español · nativo<br>Inglés · profesional completo</div>
+  </div>
+  <div style="margin-top:auto;font-family:'DM Mono',ui-monospace,monospace;font-size:9px;color:#8FB0C4;letter-spacing:.04em">11+ años construyendo sistemas backend</div>
+</aside>
+</div>
+</body>
+</html>

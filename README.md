@@ -33,6 +33,7 @@ src/
   assets/               photos
 public/favicon.svg
 public/screens/<lang>/  App Store screenshots as WebP (en, es, fr, de)
+public/cv/            CV PDFs (en, es); sources in cv/
 ```
 
 ### Editing copy
@@ -46,6 +47,13 @@ the browser (flows of the architecture explorer, career timeline, repo tour, tes
 
 Images are in `public/screens/<lang>/<id>.webp`; the list and alt text are in `src/data/screenshots.js`.
 Remove an id from that list to take a screenshot off the site.
+
+### CV
+
+`cv/cv.en.html` and `cv/cv.es.html` are the sources of the downloadable CV (A4, one page). The PDFs the
+site serves are `public/cv/Victor-Lopez-CV-en.pdf` and `-es.pdf`, linked from `src/data/site.js`.
+To regenerate one: open the HTML file in Chrome, print, choose A4, margins None, turn on Background
+graphics, and save as PDF over the file in `public/cv/`. Keep the text in sync with `src/i18n`.
 
 ### Fonts
 
