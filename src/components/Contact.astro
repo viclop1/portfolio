@@ -1,5 +1,6 @@
 ---
 import { EMAIL } from '../data/site.js';
+import Icon from './Icon.astro';
 import { getDict, type Lang } from '../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -15,9 +16,9 @@ const t = getDict(lang);
     <div class="clinks">
       <span class="mail">{EMAIL}</span>
       <div class="row2">
-        <button class="btn primary js-copy" type="button"><Fragment set:html={t.c_copy} /></button>
-        <a class="btn" href="https://www.linkedin.com/in/victor-lopez-rodriguez/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/viclop1" target="_blank" rel="noopener">GitHub</a>
+        <button class="btn primary js-copy" type="button"><Icon name="copy" /><span class="lbl"><Fragment set:html={t.c_copy} /></span></button>
+        <a class="btn" href="https://www.linkedin.com/in/victor-lopez-rodriguez/" target="_blank" rel="noopener"><Icon name="linkedin" /><span class="lbl">LinkedIn</span></a>
+        <a class="btn" href="https://github.com/viclop1" target="_blank" rel="noopener"><Icon name="github" /><span class="lbl">GitHub</span></a>
       </div>
     </div>
   </section>

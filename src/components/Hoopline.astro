@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { getDict, type Lang } from '../i18n';
 import { SCREENS, SCREEN_LANGS } from '../data/screenshots.js';
 interface Props { lang: Lang }
@@ -13,7 +14,7 @@ const t = getDict(lang);
       <p class="tagline"><Fragment set:html={t.ho_tag} /></p>
       <div class="badges"><span class="badge ok"><Fragment set:html={t.ho_st1} /></span><span class="badge"><Fragment set:html={t.ho_st2} /></span></div>
       <div class="hlinks">
-        <a class="btn primary" href="https://hooplinegm.com" target="_blank" rel="noopener"><Fragment set:html={t.ho_site} /></a>
+        <a class="btn primary" href="https://hooplinegm.com" target="_blank" rel="noopener"><span class="lbl"><Fragment set:html={t.ho_site} /></span><Icon name="external" /></a>
       </div>
     </div>
     <div class="subnav" role="tablist" aria-label="Hoopline">

@@ -74,6 +74,8 @@ p { margin: 0; }
 .btn { font-family: var(--f-mono); font-size: 14px; text-decoration: none; padding: 11px 18px; border-radius: 8px; border: 1px solid var(--ink); display: inline-block; cursor: pointer; background: transparent; color: var(--ink); }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 500; }
 .btn:hover { transform: translateY(-1px); }
+.btn:has(.ic) { display: inline-flex; align-items: center; gap: 9px; }
+.btn .ic { flex: none; }
 .uptime { margin-top: 26px; font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
 .uptime b { color: var(--ink); font-weight: 500; }
 

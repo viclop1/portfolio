@@ -295,10 +295,10 @@ import { STATS, TOUR } from "../data/hoopline.js";
   }
   $$(".js-copy").forEach(function (b) {
     b.addEventListener("click", function () {
-      var orig = b.textContent;
+      var lbl = $(".lbl", b) || b, orig = lbl.textContent;
       copyEmail(function (ok) {
-        b.textContent = ok ? t("Copied", "Copiado") : t("Select the address", "Selecciona la dirección");
-        setTimeout(function () { b.textContent = orig; }, 1800);
+        lbl.textContent = ok ? t("Copied", "Copiado") : t("Select the address", "Selecciona la dirección");
+        setTimeout(function () { lbl.textContent = orig; }, 1800);
       });
     });
   });

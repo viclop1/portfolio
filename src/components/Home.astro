@@ -1,5 +1,6 @@
 ---
 import { EMAIL } from '../data/site.js';
+import Icon from './Icon.astro';
 import { getDict, type Lang } from '../i18n';
 import portrait from '../assets/portrait.jpg';
 interface Props { lang: Lang }
@@ -35,8 +36,8 @@ const t = getDict(lang);
       <div class="clinks">
         <span class="mail">{EMAIL}</span>
         <div class="row2">
-          <button class="btn primary js-copy" type="button"><Fragment set:html={t.c_copy} /></button>
-          <a class="btn" href="#contact"><Fragment set:html={t.nav_contact} /></a>
+          <button class="btn primary js-copy" type="button"><Icon name="copy" /><span class="lbl"><Fragment set:html={t.c_copy} /></span></button>
+          <a class="btn" href="#contact"><Icon name="mail" /><span class="lbl"><Fragment set:html={t.nav_contact} /></span></a>
         </div>
       </div>
     </div>
