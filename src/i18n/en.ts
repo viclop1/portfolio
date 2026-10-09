@@ -22,6 +22,7 @@ const dict = {
   "hc3p": "How I work, what I care about, and what I do away from the keyboard.",
   "ct_h": "Have a backend problem worth solving?",
   "c_copy": "Copy email",
+  "c_cv": "Download CV",
   "cr_h": "11+ years, from intern to technical lead.",
   "sb_timeline": "Timeline",
   "sb_highlights": "Highlights",

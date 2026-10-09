@@ -24,6 +24,7 @@ const dict: Record<keyof typeof en, string> = {
   "hc3p": "Cómo trabajo, qué me importa y qué hago lejos del teclado.",
   "ct_h": "¿Tienes un problema backend que merece resolverse?",
   "c_copy": "Copiar email",
+  "c_cv": "Descargar CV",
   "cr_h": "Más de 11 años, de becario a líder técnico.",
   "sb_timeline": "Línea de tiempo",
   "sb_highlights": "Destacados",

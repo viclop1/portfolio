@@ -1,6 +1,6 @@
 /* Client-side interactivity: router, theme, architecture explorer, trace, screenshot gallery, command palette.
    Static copy is rendered at build time from src/i18n; this file only handles dynamic, bilingual widgets through t(en, es). */
-import { EMAIL } from "../data/site.js";
+import { EMAIL, CV } from "../data/site.js";
 import { NODES, FLOWS } from "../data/architecture.js";
 import { SPANS, NOWV, fr } from "../data/career.js";
 import { TESTS } from "../data/how-i-work.js";
@@ -323,6 +323,7 @@ import { STATS, TOUR } from "../data/hoopline.js";
       { l: t("Switch to Spanish", "Cambiar a inglés"), h: "EN / ES", f: function () { switchLang(lang === "es" ? "en" : "es"); } },
       { l: t("Toggle light / dark", "Alternar claro / oscuro"), h: t("theme", "tema"), f: toggleTheme },
       { l: t("Copy email", "Copiar email"), h: EMAIL, f: function () { copyEmail(); go("contact", ""); } },
+      { l: t("Download CV", "Descargar CV"), h: "PDF", href: CV[lang] }, /* cv */
       { l: "LinkedIn", h: t("opens a new tab", "abre otra pestaña"), href: "https://www.linkedin.com/in/victor-lopez-rodriguez/" },
       { l: "GitHub", h: "viclop1", href: "https://github.com/viclop1" },
       { l: "hooplinegm.com", h: t("opens a new tab", "abre otra pestaña"), href: "https://hooplinegm.com" }

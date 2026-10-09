@@ -1,5 +1,5 @@
 ---
-import { EMAIL } from '../data/site.js';
+import { EMAIL, CV } from '../data/site.js';
 import Icon from './Icon.astro';
 import { getDict, type Lang } from '../i18n';
 import portrait from '../assets/portrait.jpg';
@@ -37,6 +37,7 @@ const t = getDict(lang);
         <span class="mail">{EMAIL}</span>
         <div class="row2">
           <button class="btn primary js-copy" type="button"><Icon name="copy" /><span class="lbl"><Fragment set:html={t.c_copy} /></span></button>
+          <a class="btn js-cv" href={CV[lang]} download><Icon name="download" /><span class="lbl"><Fragment set:html={t.c_cv} /></span></a>
           <a class="btn" href="#contact"><Icon name="mail" /><span class="lbl"><Fragment set:html={t.nav_contact} /></span></a>
         </div>
       </div>
