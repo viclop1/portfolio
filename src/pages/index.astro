@@ -1,0 +1,26 @@
+---
+// Root: pick a language on the client (saved choice, then browser language) and fall back to English.
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Víctor López Rodríguez</title>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="1; url=/en/" />
+    <script is:inline>
+      (function () {
+        var l = 'en';
+        try {
+          var s = localStorage.getItem('vlr-lang');
+          if (s === 'es' || s === 'en') l = s;
+          else if ((navigator.language || '').toLowerCase().indexOf('es') === 0) l = 'es';
+        } catch (e) {}
+        location.replace('/' + l + '/' + location.hash);
+      })();
+    </script>
+  </head>
+  <body>
+    <p><a href="/en/">English</a> · <a href="/es/">Español</a></p>
+  </body>
+</html>

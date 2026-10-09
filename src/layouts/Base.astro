@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '@fontsource-variable/figtree/wght.css';
+import '@fontsource/dm-mono/400.css';
+import '@fontsource/dm-mono/500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Palette from '../components/Palette.astro';
+import { languages, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const meta = {
+  en: {
+    title: 'Víctor López Rodríguez · Senior Backend & AI Engineer',
+    description: 'Backend engineer in Madrid. Node.js, NestJS and PostgreSQL, and the solo creator of Hoopline GM, a basketball manager game live on the App Store.',
+  },
+  es: {
+    title: 'Víctor López Rodríguez · Ingeniero Senior de Backend e IA',
+    description: 'Ingeniero backend en Madrid. Node.js, NestJS y PostgreSQL, y creador en solitario de Hoopline GM, un juego de mánager de baloncesto en la App Store.',
+  },
+}[lang];
+
+const site = Astro.site ?? new URL('https://vlopez.dev');
+const canonical = new URL(`/${lang}/`, site).href;
+const ogImage = new URL('/og.png', site).href;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    {languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(`/${l}/`, site).href} />)}
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      try { var th = localStorage.getItem('vlr-theme'); if (th) document.documentElement.setAttribute('data-theme', th); } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <Header lang={lang} />
+    <main class="wrap" id="top">
+      <slot />
+      <Footer lang={lang} />
+    </main>
+    <Palette lang={lang} />
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>

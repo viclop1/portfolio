@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Home from '../../components/Home.astro';
+import Career from '../../components/Career.astro';
+import Hoopline from '../../components/Hoopline.astro';
+import About from '../../components/About.astro';
+import Contact from '../../components/Contact.astro';
+import { languages, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+<Base lang={lang}>
+  <Home lang={lang} />
+  <Career lang={lang} />
+  <Hoopline lang={lang} />
+  <About lang={lang} />
+  <Contact lang={lang} />
+</Base>
