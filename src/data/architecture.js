@@ -31,7 +31,7 @@ export const FLOWS = [
   { id: "bid", en: "Place a bid", es: "Hacer una puja", steps: [
     { a: "app", b: "pg", en: "The app calls a Postgres function over RPC with the Supabase client.", es: "La app llama a una función de Postgres por RPC con el cliente de Supabase." },
     { a: "pg", b: "pg", en: "The function checks the salary cap and the market rules under row level security, then stores the bid.", es: "La función comprueba el tope salarial y las reglas del mercado bajo seguridad a nivel de fila, y guarda la puja." },
-    { a: "cron", b: "pg", en: "Every minute, pg_cron runs the AI market and rival teams bid back.", es: "Cada minuto, pg_cron ejecuta el mercado de la IA y los equipos rivales pujan de vuelta." },
+    { a: "cron", b: "pg", en: "Every minute, pg_cron runs the market simulation and rival teams bid back.", es: "Cada minuto, pg_cron ejecuta la simulación del mercado y los equipos rivales pujan de vuelta." },
     { a: "pg", b: "edge", en: "When the player needs to know something, the send-notifications Edge Function runs.", es: "Cuando hay algo que el jugador debe saber, se ejecuta la Edge Function send-notifications." },
     { a: "edge", b: "push", en: "It sends through Firebase Cloud Messaging, and APNs delivers on iOS.", es: "Envía por Firebase Cloud Messaging, y APNs lo entrega en iOS." },
     { a: "push", b: "app", en: "The alert reaches the phone.", es: "La alerta llega al móvil." }
@@ -50,7 +50,7 @@ export const FLOWS = [
     { a: "edge", b: "pg", en: "The function verifies the signature, and only then does Postgres grant the reward.", es: "La función verifica la firma, y solo entonces Postgres concede la recompensa." },
     { a: "pg", b: "app", en: "The app shows the new balance.", es: "La app muestra el nuevo saldo." }
   ]},
-  { id: "nba", en: "Sync NBA stats", es: "Sincronizar stats NBA", steps: [
+  { id: "nba", en: "Sync NBA stats", es: "Sincronizar estadísticas NBA", steps: [
     { a: "edge", b: "edge", en: "A weekly Edge Function runs the sync. The balldontlie key lives only as its secret, and shared secrets sit in Vault.", es: "Una Edge Function semanal ejecuta la sincronización. La clave de balldontlie vive solo como secreto suyo, y los secretos compartidos están en Vault." },
     { a: "edge", b: "nba", en: "It pulls real players, teams and stats from balldontlie.", es: "Descarga jugadores, equipos y estadísticas reales de balldontlie." },
     { a: "nba", b: "pg", en: "The data lands in Postgres, and player ratings follow real-world performance.", es: "Los datos llegan a Postgres, y las valoraciones de los jugadores siguen su rendimiento real." }
