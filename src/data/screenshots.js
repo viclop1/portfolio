@@ -12,7 +12,6 @@ export const SCREENS = [
   { id: "team",   alt: ["Starting five and roster", "Quinteto titular y plantilla"] },
   { id: "box",    alt: ["Box score of a finished game", "Estadísticas de un partido terminado"] },
   { id: "table",  alt: ["League table with twelve teams", "Clasificación de la liga con doce equipos"] },
-  { id: "cups",   alt: ["Ladder of cups against fictional clubs", "Escalera de copas contra clubes ficticios"] },
-  { id: "report", alt: ["End-of-season report", "Informe de final de temporada"] }
+  { id: "cups",   alt: ["Ladder of cups against fictional clubs", "Escalera de copas contra clubes ficticios"] }
 ];
 

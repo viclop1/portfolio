@@ -371,5 +371,6 @@ footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line);
 .slang[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); }
 .shots { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 14px; }
 .shots[hidden] { display: none; }
+.legal { font-size: 12px; line-height: 1.55; color: var(--muted); max-width: 70ch; margin: 14px 0 0; }
 .shot { flex: 0 0 auto; width: min(260px, 68vw); margin: 0; scroll-snap-align: start; }
 .shot img { display: block; width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--line); background: var(--bg2); }

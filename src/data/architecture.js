@@ -42,7 +42,7 @@ export const FLOWS = [
     { a: "rc", b: "edge", en: "RevenueCat calls my revenuecat-webhook Edge Function.", es: "RevenueCat llama a mi Edge Function revenuecat-webhook." },
     { a: "edge", b: "pg", en: "The function runs apply_revenuecat_event in Postgres, which grants the gems or Premium.", es: "La función ejecuta apply_revenuecat_event en Postgres, que concede las gemas o el Premium." },
     { a: "pg", b: "resend", en: "A scheduled job sends the purchase confirmation email through Resend.", es: "Una tarea programada envía el email de confirmación de la compra a través de Resend." },
-    { a: "pg", b: "posthog", en: "pg_net reports the event to PostHog straight from the database.", es: "pg_net envía el evento a PostHog directamente desde la base de datos." }
+    { a: "pg", b: "posthog", en: "On the first Premium purchase, pg_net sends the subscription_started event to PostHog straight from the database.", es: "Si es la primera compra de Premium, pg_net envía el evento subscription_started a PostHog directamente desde la base de datos." }
   ]},
   { id: "ad", en: "Watch a reward ad", es: "Ver un anuncio con premio", steps: [
     { a: "app", b: "admob", en: "After the consent message (Google UMP, required in the EU), the app shows a rewarded ad.", es: "Tras el mensaje de consentimiento (Google UMP, obligatorio en la UE), la app muestra un anuncio con recompensa." },
@@ -50,7 +50,7 @@ export const FLOWS = [
     { a: "edge", b: "pg", en: "The function verifies the signature, and only then does Postgres grant the reward.", es: "La función verifica la firma, y solo entonces Postgres concede la recompensa." },
     { a: "pg", b: "app", en: "The app shows the new balance.", es: "La app muestra el nuevo saldo." }
   ]},
-  { id: "nba", en: "Sync NBA stats", es: "Sincronizar estadísticas NBA", steps: [
+  { id: "nba", en: "Sync player stats", es: "Sincronizar estadísticas de jugadores", steps: [
     { a: "edge", b: "edge", en: "A weekly Edge Function runs the sync. The balldontlie key lives only as its secret, and shared secrets sit in Vault.", es: "Una Edge Function semanal ejecuta la sincronización. La clave de balldontlie vive solo como secreto suyo, y los secretos compartidos están en Vault." },
     { a: "edge", b: "nba", en: "It pulls real players, teams and stats from balldontlie.", es: "Descarga jugadores, equipos y estadísticas reales de balldontlie." },
     { a: "nba", b: "pg", en: "The data lands in Postgres, and player ratings follow real-world performance.", es: "Los datos llegan a Postgres, y las valoraciones de los jugadores siguen su rendimiento real." }
@@ -58,6 +58,6 @@ export const FLOWS = [
   { id: "ship", en: "Ship a release", es: "Publicar una versión", steps: [
     { a: "github", b: "codemagic", en: "I start the ios-release workflow on Codemagic, built from the GitHub repository.", es: "Lanzo el workflow ios-release en Codemagic, construido desde el repositorio de GitHub." },
     { a: "codemagic", b: "asc", en: "Codemagic signs the build and uploads it to App Store Connect automatically.", es: "Codemagic firma el build y lo sube automáticamente a App Store Connect." },
-    { a: "asc", b: "asc", en: "After review, the release goes on sale. iOS 1.0 did on 5 October 2026.", es: "Tras la revisión, la versión sale a la venta. La 1.0 de iOS lo hizo el 5 de octubre de 2026." }
+    { a: "asc", b: "asc", en: "After review, the release is published. iOS 1.0 was published on 5 October 2026.", es: "Tras la revisión, la versión se publica. La 1.0 de iOS se publicó el 5 de octubre de 2026." }
   ]}
 ];
