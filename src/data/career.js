@@ -31,6 +31,6 @@ export const SPANS = [
     tech: ["Myme"], loc: "Madrid" },
   { id: "cf", name: "CrowdFarming", from: fr(2020, 10), to: NOWV + 0.09, child: false, cur: true,
     role: ["Backend developer", "Backend developer"],
-    sum: ["Backend services in Node.js, TypeScript and NestJS in a microservices and monorepo setup. Payments and subscriptions, e-commerce, internal tooling and farmer-facing products, with a focus on testing, performance and mentoring.", "Servicios backend en Node.js, TypeScript y NestJS en un entorno de microservicios y monorepo. Pagos y suscripciones, e-commerce, herramientas internas y productos para agricultores, con foco en testing, rendimiento y mentoría."],
+    sum: ["Backend services in Node.js, TypeScript and NestJS in a microservices and monorepo setup. Payments and subscriptions, e-commerce, internal tooling and farmer-facing products, with a focus on testing and performance.", "Servicios backend en Node.js, TypeScript y NestJS en un entorno de microservicios y monorepo. Pagos y suscripciones, e-commerce, herramientas internas y productos para agricultores, con foco en testing y rendimiento."],
     tech: ["Node.js", "TypeScript", "NestJS", "PostgreSQL", "MongoDB", "Redis", "AWS", "Jest"], loc: "España" }
 ];

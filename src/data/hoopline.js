@@ -1,15 +1,15 @@
 /** Hoopline overview data: headline stats, and the repository tour (all text as [en, es]). */
 export const STATS = [
-  [140, "", "migrations", "migraciones"], [6, "", "Edge Functions", "Edge Functions"], [4, "", "languages", "idiomas"],
-  [24, "", "feature modules", "módulos de funcionalidad"], [70, "+", "SQL test files", "ficheros de test SQL"], [7, "", "CI checks", "comprobaciones de CI"]
+  [166, "", "migrations", "migraciones"], [6, "", "Edge Functions", "Edge Functions"], [4, "", "languages", "idiomas"],
+  [25, "", "feature modules", "módulos de funcionalidad"], [70, "+", "SQL test files", "ficheros de test SQL"], [7, "", "CI checks", "comprobaciones de CI"]
 ];
 
 export const TOUR = [
-  { p: "lib/", st: ["~150 Dart files · 24 modules", "~150 ficheros Dart · 24 módulos"],
+  { p: "lib/", st: ["~170 Dart files · 25 modules", "~170 ficheros Dart · 25 módulos"],
     h: ["The Flutter app", "La app en Flutter"],
     d: ["One folder per domain (draft, market, league, playoffs, store, notifications…), each with its own screens, widgets and logic. Only bootstrap lives in main.dart, and every string goes through the localization files, and a test stops untranslated text from slipping in.",
         "Una carpeta por dominio (draft, mercado, liga, playoffs, tienda, notificaciones…), cada una con sus pantallas, widgets y lógica. En main.dart solo hay arranque, y todas las cadenas pasan por los ficheros de localización, y un test impide que se cuele texto sin traducir."] },
-  { p: "supabase/migrations/", st: ["140 numbered migrations", "140 migraciones numeradas"],
+  { p: "supabase/migrations/", st: ["166 numbered migrations", "166 migraciones numeradas"],
     h: ["The game itself, in SQL", "El juego en sí, en SQL"],
     d: ["Simulation, auctions, economy, seasons and playoffs are SQL functions and scheduled jobs, written as numbered migrations. SCHEMA_NOTES.md explains the calls that are not obvious.",
         "La simulación, las subastas, la economía, las temporadas y los playoffs son funciones SQL y tareas programadas, escritas como migraciones numeradas. SCHEMA_NOTES.md explica las decisiones poco obvias."] },
