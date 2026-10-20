@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Auditoría de diseño · Portfolio vlopez.dev</title>
+<style>
+:root{
+  --bg:#0b1219;--panel:#111b25;--line:#243546;--ink:#e8f0f6;--ink2:#b6c8d6;--muted:#8aa3b5;--accent:#ff9a4d;--ok:#4ade9a;--warn:#ffb86b;--bad:#ff8585;--code:#0d1620;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){:root{--bg:#f4f8fb;--panel:#ffffff;--line:#c9d8e3;--ink:#0b2233;--ink2:#2c4a5e;--muted:#4d6b7f;--accent:#a34e00;--ok:#0e7048;--warn:#8a5200;--bad:#b42318;--code:#eaf1f6;color-scheme:light}}
+*{box-sizing:border-box}
+html{scroll-padding-top:60px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top nav{max-width:1120px;margin:auto;padding:10px 20px;display:flex;gap:6px 14px;flex-wrap:nowrap;overflow-x:auto;font-size:13px;scrollbar-width:thin}
+.top a{white-space:nowrap}
+.top a{color:var(--ink2);text-decoration:none;padding:2px 0}
+.top a:hover{color:var(--ink)}
+.wrap{max-width:1120px;margin:auto;padding:0 20px}
+header.hero{padding:56px 0 24px}
+.eyebrow{font:500 12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);letter-spacing:.02em}
+h1{font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.1;margin:10px 0 14px;letter-spacing:-.025em;text-wrap:balance}
+h2{font-size:clamp(1.55rem,3vw,2.1rem);line-height:1.15;margin:0 0 6px;letter-spacing:-.02em;text-wrap:balance}
+h3{font-size:1.15rem;margin:30px 0 8px;letter-spacing:-.01em}
+h4{font-size:.98rem;margin:20px 0 6px}
+p{margin:0 0 12px;max-width:72ch}
+section{padding:56px 0 8px;border-top:1px solid var(--line)}
+.lead{font-size:1.08rem;color:var(--ink2);max-width:70ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin-top:16px}
+.meta b{color:var(--ink2);font-weight:600}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.card h3,.card h4{margin-top:0}
+.card ul{margin:8px 0 0;padding-left:18px}
+.card li{margin:5px 0}
+ul.tight{margin:6px 0 12px;padding-left:20px}
+ul.tight li{margin:4px 0}
+code,.mono{font:500 .86em ui-monospace,Menlo,Consolas,monospace;background:var(--code);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto;font:500 12.8px/1.55 ui-monospace,Menlo,Consolas,monospace;margin:10px 0 16px}
+pre code{background:none;border:0;padding:0;font-size:inherit}
+.tag{display:inline-block;font:600 11.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.03em;padding:4px 7px;border-radius:5px;border:1px solid var(--line);color:var(--muted);vertical-align:2px;margin-right:6px}
+.tag.alta{color:var(--bad);border-color:var(--bad)}
+.tag.media{color:var(--warn);border-color:var(--warn)}
+.tag.baja{color:var(--muted)}
+.tag.ok{color:var(--ok);border-color:var(--ok)}
+.tag.keep{color:var(--ok);border-color:var(--ok)}
+.tag.adj{color:var(--warn);border-color:var(--warn)}
+.tag.cut{color:var(--bad);border-color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 22px}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+td small{color:var(--muted)}
+.tw{overflow-x:auto}
+.tw table{min-width:640px}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout{border-left:3px solid var(--accent);background:var(--panel);padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0}
+.callout p:last-child{margin:0}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.sw{display:flex;align-items:center;gap:8px;font:500 12px ui-monospace,Menlo,monospace;color:var(--ink2);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 9px 5px 5px}
+.sw i{width:22px;height:22px;border-radius:5px;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);display:block}
+details{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:12px 0;overflow:hidden}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸";color:var(--muted);transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+details .inner{padding:4px 16px 16px}
+.shots{display:grid;gap:12px;margin:8px 0 16px}
+.shots.s1440{grid-template-columns:repeat(2,minmax(0,1fr))}
+.shots.s390{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:860px){.shots.s390{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.shots.s1440{grid-template-columns:minmax(0,1fr)}}
+figure{margin:0}
+figure a{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000}
+figure img{display:block;width:100%;height:auto}
+figcaption{font:500 11.5px ui-monospace,Menlo,monospace;color:var(--muted);padding:5px 2px}
+.shot-row-title{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}}
+.verdict{display:inline-block;margin-left:6px}
+footer{padding:40px 0 70px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:56px}
+.k{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.k dt{color:var(--muted)}
+.k dd{margin:0}
+.rec{border:1px solid var(--accent);border-radius:12px;padding:18px 22px;background:color-mix(in srgb,var(--accent) 7%,var(--panel));margin:22px 0}
+.rec h3{margin-top:0}
+.small{font-size:13.5px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><nav aria-label="Secciones del informe">
+<a href="#resumen">Resumen</a><a href="#metodo">Método y límites</a><a href="#diagnostico">1 · Diagnóstico</a><a href="#capturas">Capturas «antes»</a><a href="#auditoria">2 · Auditoría</a><a href="#movimiento">2b · Movimiento</a><a href="#referencias">3 · Referencias</a><a href="#propuesta">4 · Propuesta</a><a href="#recomendacion">Recomendación</a><a href="#no-cambia">Lo que NO cambia</a>
+</nav></div>
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">DESIGN-AUDIT · FASE 1 (ANÁLISIS Y PROPUESTA) · 19 OCT 2026</div>
+  <h1>Auditoría de diseño del portfolio</h1>
+  <p class="lead">Diagnóstico visual, auditoría de accesibilidad y movimiento, análisis de referencias y dos direcciones de rediseño para vlopez.dev. <b>No se ha editado ningún archivo de <code>src/</code></b>: este informe y sus capturas son lo único que se ha añadido (<code>design-audit/</code>).</p>
+  <div class="meta"><span><b>Build analizado:</b> <code>dist/</code> del 13 oct 2026 (HEAD <code>3c4099d</code>, sin cambios locales en <code>src/</code>)</span><span><b>Capturas:</b> 100 (EN/ES · claro/oscuro · 390/1440 px · 12 vistas)</span><span><b>Ponderación de movimiento:</b> Jakub (principal) · Emil (apoyo) · Jhey (solo detalles lúdicos)</span></div>
+</header>
+
+<section id="resumen">
+<h2>Resumen</h2>
+<div class="grid g2">
+ <div class="card"><h3>Lo esencial</h3>
+ <ul>
+  <li><b>La base es buena y hay que conservarla:</b> la metáfora de API/traza (<code>GET /career</code>, la línea de tiempo como trace, los flujos de arquitectura), la paleta tomada del retrato y un dark mode sólido (contrastes de texto de 6,4 a 16,7:1). Carga ligera (~213 KB de recursos), sin desbordes horizontales en ninguna de las 48 combinaciones idioma × ancho × vista, y <code>prefers-reduced-motion</code> realmente respetado (0 animaciones activas medidas).</li>
+  <li><b>Lo que lo hace genérico no es la paleta, es el uso:</b> la misma tarjeta repetida en 4 contextos, el naranja en <b>55 sitios</b> (42 <code>--accent</code> + 13 <code>--accent-text</code>), la tipografía mono en <b>47 declaraciones</b> (todo el UI), y el retrato con marco desplazado + resplandor.</li>
+  <li><b>Lo que falla de verdad:</b> la arquitectura de Hoopline en móvil (el 58 % del diagrama queda fuera de pantalla y las subetiquetas se ven a 8,6 px), el foco de teclado en tema claro (2,26:1), bucles de movimiento infinitos sin pausa, una línea doble bajo la cabecera, y vistas con huecos (Contact, Decisions).</li>
+  <li><b>Movimiento:</b> en general correcto y contenido. Tres ajustes claros: quitar el scroll suave de ~400 ms en cada navegación (también desde la paleta de teclado), acotar los bucles de <b>About → Off the clock</b>, y quitar el «levantar» en tarjetas que no son enlaces.</li>
+ </ul></div>
+ <div class="card"><h3>Recomendación</h3>
+ <p><b>Dirección A · «Trace, en limpio»</b> (evolutiva, editorial-técnica). Ataca las causas del aspecto genérico (jerarquía, presupuesto de acento, monotonía de tarjetas, escala sin sistema), arregla los fallos medidos y es 100 % CSS sobre los ganchos que ya existen. La Dirección B («Escenario») es más expresiva pero arriesga el posicionamiento de ingeniero backend senior y añade coste de QA y de movimiento.</p>
+ <p class="small">Detalle y razones en <a href="#recomendacion">Recomendación</a>. La lista de lo que no se toca está en <a href="#no-cambia">Lo que NO cambia</a>.</p>
+ <p class="small">Un detalle que conviene decidir pronto: el punto verde junto a «Madrid, Spain» (<code>Home.astro:14</code>) se lee como «disponible/en línea». Como el portfolio no debe anunciar búsqueda activa, la propuesta lo neutraliza.</p></div>
+</div>
+</section>
+
+<section id="metodo">
+<h2>Método y límites</h2>
+<ul class="tight">
+ <li><b>Qué se leyó:</b> <code>package.json</code>, <code>astro.config.mjs</code>, <code>global.css</code> (376 líneas), <code>main.js</code> (398), los 9 componentes, <code>Base.astro</code>, la página <code>[lang]</code> y las skills de auditoría del proyecto.</li>
+ <li><b>Capturas:</b> <code>playwright-cli</code> no está disponible (el registro npm responde 403 en tu equipo y no está instalado en el entorno cloud). Usé Playwright 1.56 + Chromium directamente: mismo motor, página completa, DPR 1, tema forzado con <code>localStorage vlr-theme</code> + <code>color-scheme</code>. Servido en local con un servidor estático sobre el <code>dist/</code> ya generado (en tu Mac no pude recompilar desde aquí: <code>node_modules</code> es de macOS).</li>
+ <li><b>Mediciones:</b> contraste calculado con la fórmula WCAG sobre los tokens; tamaños táctiles, desbordes, animaciones en ejecución y escalas tipográficas medidos en el navegador; foco y orden de tabulación recorridos con teclado.</li>
+ <li><b>Referencias:</b> las vi en el navegador integrado de la app, pero con el panel fuera de pantalla las capturas salían en negro, así que medí <b>DOM y CSS</b> (tipografía, alturas de módulo, transiciones, <code>prefers-reduced-motion</code>) y leí el texto de cada página. Lo que dependa de animaciones por JavaScript (scroll, física) <b>no lo pude observar</b> y no lo afirmo. manus.im se sirvió en español por el idioma del navegador.</li>
+ <li><b>No probado:</b> Safari y Firefox, dispositivos reales, lector de pantalla, Lighthouse. Conviene hacerlo en la fase de implementación.</li>
+</ul>
+</section>
+
+<section id="diagnostico">
+<h2>1 · Diagnóstico</h2>
+<p class="lead">Qué funciona, qué se ve genérico y qué falla. Cada punto cita su evidencia (capturas en <a href="#capturas">«antes»</a>, líneas de <code>global.css</code> o componentes).</p>
+
+<h3>Qué funciona (conservar)</h3>
+<div class="grid g2">
+ <div class="card"><b>Concepto propio.</b> «API de una persona»: etiquetas <code>GET /career</code> y <code>POST /contact</code>, línea de tiempo como trace con playhead, flujos de arquitectura paso a paso. Es memorable y coherente con un perfil backend.</div>
+ <div class="card"><b>Paleta con origen.</b> Azul de estudio + naranja del retrato. El oscuro está muy bien resuelto (texto 6,4–16,7:1; botón primario 8,9:1).</div>
+ <div class="card"><b>Tipografía con carácter.</b> Bricolage Grotesque (display) + Figtree (cuerpo) + DM Mono, autohospedadas (4 archivos woff2 en la carga inicial), sin peticiones a terceros.</div>
+ <div class="card"><b>Estructura de una vista por pantalla.</b> Menos scroll, subnavegación clara, mismos layouts en ES y EN (sin desbordes en 48 combinaciones medidas). ~213 KB de recursos en la carga inicial (sin contar el HTML).</div>
+ <div class="card"><b>Accesibilidad base.</b> Skip link, <code>:focus-visible</code> global, <code>aria-live</code> en los detalles, <code>alt</code> y dimensiones en imágenes, iconos decorativos con <code>aria-hidden</code>, ningún <code>transition: all</code>.</div>
+ <div class="card"><b>Capturas reales de Hoopline.</b> Las pantallas de la App Store en 4 idiomas son el mejor activo visual del sitio y hoy están enterradas en la 4.ª pestaña de Hoopline.</div>
+</div>
+
+<h3>Qué se ve genérico</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Observación</th><th>Evidencia</th></tr></thead>
+<tbody>
+<tr><td>G1</td><td><b>Retrato con marco naranja desplazado + resplandor.</b> Es el recurso más reconocible de «plantilla de portfolio» y compite con el nombre.</td><td><code>global.css:211-213</code> · captura <em>home</em></td></tr>
+<tr><td>G2</td><td><b>Una sola tarjeta para todo.</b> <code>.card</code> (mismo fondo, borde, radio y padding) se reutiliza en Home, Highlights, Decisions y Off the clock. Todo pesa igual y nada guía la mirada.</td><td><code>global.css:139-146</code></td></tr>
+<tr><td>G3</td><td><b>Inflación de acento.</b> El naranja es botón primario, pestaña activa, etiqueta de ruta, texto de tags (×11 solo en «Built with»), números de estadísticas, viñetas, playhead, borde del avatar, marco del retrato y foco. 42 usos de <code>--accent</code> + 13 de <code>--accent-text</code>: cuando todo destaca, nada destaca.</td><td>recuento sobre <code>global.css</code></td></tr>
+<tr><td>G4</td><td><b>Mono en todo el UI.</b> Navegación, botones, pestañas, chips, etiquetas y pie en DM Mono 12–14 px (47 declaraciones). La mono deja de significar «dato técnico» y aplana la jerarquía.</td><td><code>global.css</code> · captura <em>hoopline</em></td></tr>
+<tr><td>G5</td><td><b>Hero apilado.</b> Nombre en 3 líneas a 64 px (~200 px de alto), rol, lede (con viuda «Store.» en EN a 1440), 6 chips, 2 CTA y línea de «uptime»: cinco grupos en una columna. Poco aire entre ellos y mucho bajo el hero.</td><td>captura <em>en-dark-1440-home</em></td></tr>
+<tr><td>G6</td><td><b>Contacto duplicado.</b> La franja «Have a backend problem worth solving?» de Home repite la vista Contact casi literal.</td><td><code>Home.astro:34-44</code> · <code>Contact.astro</code></td></tr>
+<tr><td>G7</td><td><b>Ilustraciones «clip-art» con colores fijos</b> (#0B7A3E, #14232F, #FF5C8A…) en el estilo plano de iconos; es la sección lúdica, pero no dialoga con el resto del sistema.</td><td><code>About.astro:49-52</code></td></tr>
+<tr><td>G8</td><td><b>Punto verde de «estado»</b> junto a la ubicación. Se lee como «en línea / disponible»; no encaja con no anunciar búsqueda activa.</td><td><code>Home.astro:14</code> · <code>global.css:68</code></td></tr>
+</tbody></table></div>
+
+<h3>Qué falla</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Sev.</th><th>Hallazgo</th><th>Evidencia / medición</th></tr></thead>
+<tbody>
+<tr><td>F1</td><td><span class="tag alta">ALTA</span></td><td><b>Arquitectura de Hoopline ilegible en móvil.</b> El SVG tiene <code>min-width: 820px</code> (escala 0,82): etiquetas a 11,1 px y subetiquetas a <b>8,6 px</b>. En 390 px solo se ven 348 de 820 px (42 %); el resto exige scroll horizontal sin indicación. En 1440 px sí se lee (15,6 / 12,2 px).</td><td><code>global.css:220</code> · medido en Chromium · captura <em>en-dark-390-hoopline-architecture</em></td></tr>
+<tr><td>F2</td><td><span class="tag alta">ALTA</span></td><td><b>Foco de teclado en tema claro: 2,26:1.</b> El anillo usa <code>--accent</code> (#F28A2E) sobre #EEF5F9; el mínimo es 3:1. En oscuro es 8,85:1.</td><td><code>global.css:40</code> · cálculo WCAG</td></tr>
+<tr><td>F3</td><td><span class="tag media">MEDIA</span></td><td><b>Línea doble bajo la cabecera</b> en todas las vistas: <code>section { border-top }</code> alcanza a <code>.view</code> y se suma al borde de <code>.bar</code>, dibujando una segunda línea a ancho de contenido.</td><td><code>global.css:95</code> · visible en las 40 capturas principales</td></tr>
+<tr><td>F4</td><td><span class="tag media">MEDIA</span></td><td><b>Sin escala ni ritmo.</b> 20 tamaños de fuente distintos (de 10,5 px a 1,7 rem) y 29 valores de espaciado (1–80 px, con 14/18/22/26/34 sueltos). La jerarquía depende del ojo, no de un sistema.</td><td>recuento sobre <code>global.css</code></td></tr>
+<tr><td>F5</td><td><span class="tag media">MEDIA</span></td><td><b>Decisions:</b> 7 tarjetas iguales en 3 columnas; la altura de cada fila la marca la más larga, así que 4 de 7 quedan con más de la mitad vacía y la 07 queda huérfana.</td><td>captura <em>en-dark-1440-hoopline-decisions</em></td></tr>
+<tr><td>F6</td><td><span class="tag media">MEDIA</span></td><td><b>Contact a 1440×900:</b> el contenido termina a y≈430 y el pie flota a mitad de pantalla, con ~360 px muertos debajo.</td><td>captura <em>en-dark-1440-contact</em></td></tr>
+<tr><td>F7</td><td><span class="tag media">MEDIA</span></td><td><b>Cabecera de Hoopline demasiado alta:</b> ruta, título, claim, 2 badges, 2 CTA, subnav y luego los pills de la vista: el contenido empieza hacia y≈510 (1440×900) y y≈530 (390×844), más de la mitad del viewport. Dos estilos de pestañas (subrayado y píldora) con la píldora más pesada que la navegación principal.</td><td>capturas <em>hoopline</em> 1440 y 390</td></tr>
+<tr><td>F8</td><td><span class="tag media">MEDIA</span></td><td><b>Subnav recortada en móvil sin pista de scroll:</b> «Fuera del tr…», «Cap…» (Capturas).</td><td><code>global.css:263</code> · capturas ES 390</td></tr>
+<tr><td>F9</td><td><span class="tag baja">BAJA</span></td><td><b>Career:</b> etiquetas truncadas en 1440 («Full Stack Develo…», «Technical Project…») por la columna de 96–168 px con elipsis.</td><td>captura <em>en-dark-1440-career</em></td></tr>
+<tr><td>F10</td><td><span class="tag baja">BAJA</span></td><td><b>Terminal con paleta propia</b> (#0A0C18, #23284A, #8E95C4, #3A4175: matiz índigo) fuera de los tokens. En claro es un bloque oscuro ajeno al resto.</td><td><code>global.css:156-162</code></td></tr>
+<tr><td>F11</td><td><span class="tag baja">BAJA</span></td><td><b>Texto muy pequeño:</b> 10,5 / 11 / 11,5 / 12 px en marcas del eje, subetiquetas del diagrama y rótulos de estadísticas (33 nodos de texto a ≤13 px en Home 1440).</td><td>medido · <code>global.css:115,328</code></td></tr>
+<tr><td>F12</td><td><span class="tag baja">BAJA</span></td><td><b>Bordes y barras débiles en claro:</b> <code>--line</code> 1,36:1 contra el fondo (bordes de <code>.ibtn</code>/<code>.seg</code>) y barras de la traza 2,08:1 contra <code>--bg2</code>. Los controles se identifican por su texto, pero el límite visual es muy tenue.</td><td>cálculo WCAG</td></tr>
+<tr><td>F13</td><td><span class="tag baja">BAJA</span></td><td><b>Zonas táctiles de 32–34 px de alto en la cabecera móvil</b> (EN/ES 35×32, tema 52×34, menú 33×34). Cumplen el mínimo AA de 24 px (WCAG 2.2) pero están por debajo de los 44 px recomendados.</td><td>medido en 390 px</td></tr>
+<tr><td>F14</td><td><span class="tag baja">BAJA</span></td><td><b>CSS heredado sin uso:</b> 16 clases (<code>.chips .edu .hfacts .hoop .info .lg .links .mapbox .maphead .mono .nm .ov .r2 .repos .sec-head .two</code>) y <code>#map</code>, restos de versiones anteriores.</td><td>comprobado contra <code>src/**</code></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="capturas">
+<h2>Capturas «antes»</h2>
+<p class="lead">100 capturas de página completa. Cada bloque agrupa EN/ES × oscuro/claro. Clic en una imagen para verla a tamaño real. Nombre de archivo: <code>idioma-tema-ancho-vista.webp</code> (carpeta <code>img/</code>).</p>
+<details open><summary>Home <span class="tag">#home</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-home.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-home.webp" alt="Captura home EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-home.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-home.webp" alt="Captura home EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-home.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-home.webp" alt="Captura home ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-home.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-home.webp" alt="Captura home ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-home.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-home.webp" alt="Captura home EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-home.webp" target="_blank" rel="noopener"><img src="img/en-light-390-home.webp" alt="Captura home EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-home.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-home.webp" alt="Captura home ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-home.webp" target="_blank" rel="noopener"><img src="img/es-light-390-home.webp" alt="Captura home ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Career · timeline <span class="tag">#career</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-career.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-career.webp" alt="Captura career EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-career.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-career.webp" alt="Captura career EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-career.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-career.webp" alt="Captura career ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-career.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-career.webp" alt="Captura career ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-career.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-career.webp" alt="Captura career EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-career.webp" target="_blank" rel="noopener"><img src="img/en-light-390-career.webp" alt="Captura career EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-career.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-career.webp" alt="Captura career ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-career.webp" target="_blank" rel="noopener"><img src="img/es-light-390-career.webp" alt="Captura career ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Career · highlights <span class="tag">#career-highlights</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-career-highlights.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-career-highlights.webp" alt="Captura career-highlights EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-career-highlights.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-career-highlights.webp" alt="Captura career-highlights EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-career-highlights.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-career-highlights.webp" alt="Captura career-highlights ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-career-highlights.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-career-highlights.webp" alt="Captura career-highlights ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-career-highlights.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-career-highlights.webp" alt="Captura career-highlights EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-career-highlights.webp" target="_blank" rel="noopener"><img src="img/en-light-390-career-highlights.webp" alt="Captura career-highlights EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-career-highlights.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-career-highlights.webp" alt="Captura career-highlights ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-career-highlights.webp" target="_blank" rel="noopener"><img src="img/es-light-390-career-highlights.webp" alt="Captura career-highlights ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Career · stack <span class="tag">#career-stack</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-career-stack.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-career-stack.webp" alt="Captura career-stack EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-career-stack.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-career-stack.webp" alt="Captura career-stack EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-career-stack.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-career-stack.webp" alt="Captura career-stack ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-career-stack.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-career-stack.webp" alt="Captura career-stack ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-career-stack.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-career-stack.webp" alt="Captura career-stack EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-career-stack.webp" target="_blank" rel="noopener"><img src="img/en-light-390-career-stack.webp" alt="Captura career-stack EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-career-stack.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-career-stack.webp" alt="Captura career-stack ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-career-stack.webp" target="_blank" rel="noopener"><img src="img/es-light-390-career-stack.webp" alt="Captura career-stack ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Hoopline · overview <span class="tag">#hoopline</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-hoopline.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-hoopline.webp" alt="Captura hoopline EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-hoopline.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-hoopline.webp" alt="Captura hoopline EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-hoopline.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-hoopline.webp" alt="Captura hoopline ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-hoopline.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-hoopline.webp" alt="Captura hoopline ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-hoopline.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-hoopline.webp" alt="Captura hoopline EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-hoopline.webp" target="_blank" rel="noopener"><img src="img/en-light-390-hoopline.webp" alt="Captura hoopline EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-hoopline.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-hoopline.webp" alt="Captura hoopline ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-hoopline.webp" target="_blank" rel="noopener"><img src="img/es-light-390-hoopline.webp" alt="Captura hoopline ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Hoopline · architecture <span class="tag">#hoopline-architecture</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-hoopline-architecture.webp" alt="Captura hoopline-architecture EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-hoopline-architecture.webp" alt="Captura hoopline-architecture EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-hoopline-architecture.webp" alt="Captura hoopline-architecture ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-hoopline-architecture.webp" alt="Captura hoopline-architecture ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-hoopline-architecture.webp" alt="Captura hoopline-architecture EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/en-light-390-hoopline-architecture.webp" alt="Captura hoopline-architecture EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-hoopline-architecture.webp" alt="Captura hoopline-architecture ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-hoopline-architecture.webp" target="_blank" rel="noopener"><img src="img/es-light-390-hoopline-architecture.webp" alt="Captura hoopline-architecture ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Hoopline · decisions <span class="tag">#hoopline-decisions</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-hoopline-decisions.webp" alt="Captura hoopline-decisions EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-hoopline-decisions.webp" alt="Captura hoopline-decisions EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-hoopline-decisions.webp" alt="Captura hoopline-decisions ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-hoopline-decisions.webp" alt="Captura hoopline-decisions ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-hoopline-decisions.webp" alt="Captura hoopline-decisions EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/en-light-390-hoopline-decisions.webp" alt="Captura hoopline-decisions EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-hoopline-decisions.webp" alt="Captura hoopline-decisions ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-hoopline-decisions.webp" target="_blank" rel="noopener"><img src="img/es-light-390-hoopline-decisions.webp" alt="Captura hoopline-decisions ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Hoopline · screens <span class="tag">#hoopline-screens</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-hoopline-screens.webp" alt="Captura hoopline-screens EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-hoopline-screens.webp" alt="Captura hoopline-screens EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-hoopline-screens.webp" alt="Captura hoopline-screens ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-hoopline-screens.webp" alt="Captura hoopline-screens ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-hoopline-screens.webp" alt="Captura hoopline-screens EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/en-light-390-hoopline-screens.webp" alt="Captura hoopline-screens EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-hoopline-screens.webp" alt="Captura hoopline-screens ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-hoopline-screens.webp" target="_blank" rel="noopener"><img src="img/es-light-390-hoopline-screens.webp" alt="Captura hoopline-screens ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>About · story <span class="tag">#about</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-about.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-about.webp" alt="Captura about EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-about.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-about.webp" alt="Captura about EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-about.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-about.webp" alt="Captura about ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-about.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-about.webp" alt="Captura about ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-about.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-about.webp" alt="Captura about EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-about.webp" target="_blank" rel="noopener"><img src="img/en-light-390-about.webp" alt="Captura about EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-about.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-about.webp" alt="Captura about ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-about.webp" target="_blank" rel="noopener"><img src="img/es-light-390-about.webp" alt="Captura about ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>About · how I work <span class="tag">#about-how</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-about-how.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-about-how.webp" alt="Captura about-how EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-about-how.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-about-how.webp" alt="Captura about-how EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-about-how.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-about-how.webp" alt="Captura about-how ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-about-how.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-about-how.webp" alt="Captura about-how ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-about-how.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-about-how.webp" alt="Captura about-how EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-about-how.webp" target="_blank" rel="noopener"><img src="img/en-light-390-about-how.webp" alt="Captura about-how EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-about-how.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-about-how.webp" alt="Captura about-how ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-about-how.webp" target="_blank" rel="noopener"><img src="img/es-light-390-about-how.webp" alt="Captura about-how ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>About · off the clock <span class="tag">#about-off</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-about-off.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-about-off.webp" alt="Captura about-off EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-about-off.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-about-off.webp" alt="Captura about-off EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-about-off.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-about-off.webp" alt="Captura about-off ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-about-off.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-about-off.webp" alt="Captura about-off ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-about-off.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-about-off.webp" alt="Captura about-off EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-about-off.webp" target="_blank" rel="noopener"><img src="img/en-light-390-about-off.webp" alt="Captura about-off EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-about-off.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-about-off.webp" alt="Captura about-off ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-about-off.webp" target="_blank" rel="noopener"><img src="img/es-light-390-about-off.webp" alt="Captura about-off ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Contact <span class="tag">#contact</span></summary><div class="inner">
+<div class="shot-row-title">1440 px</div><div class="shots s1440"><figure><a href="img/en-dark-1440-contact.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-contact.webp" alt="Captura contact EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-contact.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-contact.webp" alt="Captura contact EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-contact.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-contact.webp" alt="Captura contact ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-contact.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-contact.webp" alt="Captura contact ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+<div class="shot-row-title">390 px</div><div class="shots s390"><figure><a href="img/en-dark-390-contact.webp" target="_blank" rel="noopener"><img src="img/en-dark-390-contact.webp" alt="Captura contact EN · oscuro 390px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-390-contact.webp" target="_blank" rel="noopener"><img src="img/en-light-390-contact.webp" alt="Captura contact EN · claro 390px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-390-contact.webp" target="_blank" rel="noopener"><img src="img/es-dark-390-contact.webp" alt="Captura contact ES · oscuro 390px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-390-contact.webp" target="_blank" rel="noopener"><img src="img/es-light-390-contact.webp" alt="Captura contact ES · claro 390px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div>
+</div></details>
+<details><summary>Paleta de comandos (Ctrl K) <span class="tag">1440 px</span></summary><div class="inner"><div class="shots s1440"><figure><a href="img/en-dark-1440-palette.webp" target="_blank" rel="noopener"><img src="img/en-dark-1440-palette.webp" alt="Captura palette EN · oscuro 1440px" loading="lazy"></a><figcaption>EN · oscuro</figcaption></figure><figure><a href="img/en-light-1440-palette.webp" target="_blank" rel="noopener"><img src="img/en-light-1440-palette.webp" alt="Captura palette EN · claro 1440px" loading="lazy"></a><figcaption>EN · claro</figcaption></figure><figure><a href="img/es-dark-1440-palette.webp" target="_blank" rel="noopener"><img src="img/es-dark-1440-palette.webp" alt="Captura palette ES · oscuro 1440px" loading="lazy"></a><figcaption>ES · oscuro</figcaption></figure><figure><a href="img/es-light-1440-palette.webp" target="_blank" rel="noopener"><img src="img/es-light-1440-palette.webp" alt="Captura palette ES · claro 1440px" loading="lazy"></a><figcaption>ES · claro</figcaption></figure></div></div></details>
+</section>
+
+<section id="auditoria">
+<h2>2 · Auditoría con web-design-guidelines</h2>
+<p class="lead">Reglas de <code>vercel-labs/web-interface-guidelines</code> (descargadas hoy), aplicadas a <code>src/</code>. Formato terso <code>archivo:línea — hallazgo</code>. Lo marcado <span class="tag baja">MARKUP</span> o <span class="tag baja">JS</span> queda <b>fuera del alcance</b> de esta pasada (solo estilos): se anota para una fase aparte y no se tocará sin tu visto bueno.</p>
+
+<h3>src/styles/global.css</h3>
+<pre><code>global.css:40   - :focus-visible usa --accent; en claro 2,26:1 (&lt;3:1) → token --focus por tema
+global.css:182  - .pbox input con outline:none sin sustituto visible → :focus-visible propio
+global.css:31   - scroll-behavior:smooth + scrollTo(0,0) de main.js → ~400 ms en cada navegación (medido 566→0 px), incluida la paleta (teclado)
+global.css:76   - .btn:hover{transform} sin transition (salto de 1 px); sin estado :active
+global.css:57-62,86-88,264-265 - hovers (.seg a, .pill, .subnav a, .ibtn, .nav a) cambian al instante; sin transición de color/borde
+global.css:141  - .card:hover eleva y resalta en tarjetas que no son enlaces (highlights, decisions, off) → falsa affordance
+global.css:234,302,344-347 - bucles infinite sin pausa (.pulse, .eq, bnc, shd, lft, hrt): WCAG 2.2.2 si pasan de 5 s junto a otro contenido
+global.css:259,319 - entradas de 350 ms con ease-out / ease por defecto en navegación y cambio de pestaña
+global.css:79-80,129,327 - cifras variables (uptime, scrub, contador de stats) sin font-variant-numeric: tabular-nums
+global.css:(párrafos) - sin text-wrap:pretty; viuda «Store.» en .lede (EN, 1440)
+global.css:(general) - sin overscroll-behavior:contain en .pal/.plist; sin touch-action:manipulation en controles
+global.css:263,372 - overflow-x:auto en .subnav y .shots sin indicio de scroll (390: «Fuera del tr…»)
+global.css:220  - #svg min-width:820px → texto a 8,6–11 px en móvil; contenedor con scroll
+global.css:156-162 - terminal con colores literales fuera de tokens
+global.css:95   - section{border-top} alcanza .view → línea doble bajo la cabecera
+global.css:(varios) - 16 clases y #map sin uso</code></pre>
+
+<h3>Componentes y layout</h3>
+<pre><code>Home.astro:15            - único &lt;h1&gt; del sitio está en la vista Home; el resto empieza en &lt;h2&gt;; las tarjetas de Home usan &lt;h3&gt; sin &lt;h2&gt;   [MARKUP]
+Career.astro:13-16, Hoopline.astro:21-25,29-32,61, About.astro:14-17
+                         - role="tab" sobre &lt;a href="#…"&gt; sin aria-controls, sin role="tabpanel", sin flechas: es navegación por hash.
+                           Semántica HTML primero (enlaces con aria-current) o completar el patrón ARIA   [MARKUP/JS]
+Hoopline.astro:70        - #diagram con scroll horizontal sin tabindex="0" ni rol/etiqueta: inalcanzable con teclado cuando desborda   [MARKUP]
+Hoopline.astro:103       - .shots con scroll horizontal, mismo problema   [MARKUP]
+Base.astro:34            - falta &lt;meta name="theme-color"&gt; (claro/oscuro) y &lt;link rel="preload" as="font"&gt; para Bricolage y Figtree latin   [MARKUP]
+Home.astro:26            - imagen candidata a LCP sin fetchpriority="high"   [MARKUP]
+Hoopline.astro/Career.astro - nombres de marca y stack sin translate="no"   [MARKUP]
+Palette.astro:8 + main.js - al cerrar la paleta el foco no vuelve al botón que la abrió   [JS]</code></pre>
+
+<h3>Pasa (✓)</h3>
+<ul class="tight">
+ <li>Imágenes con <code>width</code>/<code>height</code>; las de Hoopline con <code>loading="lazy"</code> (en paneles ocultos no se descargan hasta verse).</li>
+ <li>Iconos decorativos con <code>aria-hidden</code>; botones solo-icono con <code>aria-label</code>; skip link presente.</li>
+ <li>Ningún <code>transition: all</code>; ningún <code>user-scalable=no</code>; fechas con <code>Intl.DateTimeFormat</code>; <code>color-scheme</code> declarado por tema.</li>
+ <li>Transformaciones SVG con <code>transform-box: fill-box</code> (<code>.pulse</code>).</li>
+ <li>Orden de tabulación coherente (skip → logo → navegación → idioma → tema → paleta → contenido) y anillo de foco visible en todos los controles probados (solo falla el contraste en claro).</li>
+ <li><code>prefers-reduced-motion</code>: con la preferencia activa, 0 animaciones en ejecución en Home, Hoopline, Arquitectura y About.</li>
+</ul>
+
+<h3>Contraste medido (WCAG 2.x)</h3>
+<div class="tw"><table>
+<thead><tr><th>Par</th><th>Oscuro</th><th>Claro</th><th>Criterio</th></tr></thead>
+<tbody>
+<tr><td>Texto <code>--ink</code> / <code>--bg</code></td><td class="num">16,69</td><td class="num">14,77</td><td>≥4,5 ✓</td></tr>
+<tr><td><code>--muted</code> / <code>--bg</code></td><td class="num">8,14</td><td class="num">5,12</td><td>≥4,5 ✓</td></tr>
+<tr><td><code>--muted</code> / <code>--bg2</code></td><td class="num">7,42</td><td class="num">4,69</td><td>≥4,5 ✓ (justo en claro)</td></tr>
+<tr><td><code>--muted</code> / <code>--surface</code></td><td class="num">6,38</td><td class="num">5,64</td><td>≥4,5 ✓</td></tr>
+<tr><td><code>--accent-text</code> / <code>--bg</code></td><td class="num">8,85</td><td class="num">5,23</td><td>≥4,5 ✓</td></tr>
+<tr><td><code>--accent-text</code> / <code>--bg2</code></td><td class="num">8,07</td><td class="num">4,79</td><td>≥4,5 ✓</td></tr>
+<tr><td>Botón primario (tinta / acento)</td><td class="num">8,90</td><td class="num">7,54</td><td>≥4,5 ✓</td></tr>
+<tr><td>Badge «ok» / <code>--bg</code></td><td class="num">10,83</td><td class="num">4,51</td><td>≥4,5 ✓ (límite en claro)</td></tr>
+<tr><td><strong>Anillo de foco <code>--accent</code> / <code>--bg</code></strong></td><td class="num">8,85</td><td class="num"><b>2,26 ✗</b></td><td>≥3 (no texto)</td></tr>
+<tr><td><code>--line</code> / <code>--bg</code> (bordes de control)</td><td class="num">1,87</td><td class="num">1,36</td><td>≥3 recomendado ✗</td></tr>
+<tr><td>Barra de traza / <code>--bg2</code></td><td class="num">4,12</td><td class="num">2,08</td><td>≥3 ✗ en claro</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="movimiento">
+<h2>2b · Auditoría de movimiento</h2>
+<div class="callout"><p><b>Contexto y ponderación.</b> Portfolio de ingeniero backend senior, uso ocasional (una visita, pocas vistas), con una sección deliberadamente lúdica. Siguiendo tu criterio: <b>Jakub manda</b> («¿es lo bastante sutil y pulido para producción?»), <b>Emil apoya</b> («¿debería animarse esto?»: puerta de frecuencia, nada animado desde teclado, &lt;300 ms en lo que se repite) y <b>Jhey solo en detalles lúdicos</b> (About → Off the clock). Compruebo también los huecos de movimiento: los cambios de vista y de panel son instantáneos salvo las entradas indicadas, lo cual es correcto en navegación frecuente.</p></div>
+
+<h3>Casos que pedías decidir</h3>
+<div class="tw"><table>
+<thead><tr><th>Elemento</th><th>Qué hace</th><th>Veredicto</th><th>Razón y acción</th></tr></thead>
+<tbody>
+<tr><td><code>.pulse</code><br><small>global.css:234</small></td><td>Anillo que se expande 1,2 s <code>infinite</code> sobre el nodo activo del diagrama cuando un paso no tiene arista (origen = destino).</td><td><span class="tag keep">INTENCIONADO</span><span class="tag adj">AJUSTAR</span></td><td><b>Funcional, no decorativo:</b> señala «aquí ocurre el trabajo» cuando no hay flecha que animar. Sin él, el nodo sigue resaltado por <code>.act</code> (alternativa sin movimiento, y es lo que ve quien activa reduced-motion). Pero no necesita ser infinito: <b>3 iteraciones</b> (el nodo se recrea en cada paso, así que se reinicia solo) y curva ease-out propia. Lente: Jakub + Emil.</td></tr>
+<tr><td><code>.eq</code><br><small>global.css:301-304</small></td><td>5 barras de ecualizador en la tarjeta «Music», bucle de 1 s sin fin.</td><td><span class="tag adj">AJUSTAR</span></td><td><b>Intención legítima, ejecución de ruido:</b> es un indicador «sonando» perpetuo en una vista de baja frecuencia. Encaja en el espacio lúdico (Jhey), pero en bucle infinito junto a otras 4 animaciones incumple 2.2.2 (sin pausa). Reproducir en <code>:hover</code>/<code>:focus-within</code> de la tarjeta y, en táctil, 3 ciclos al entrar en pantalla; en reposo, barras estáticas (ya es lo que se muestra en reduced-motion).</td></tr>
+<tr><td><code>bnc</code> + <code>shd</code><br><small>global.css:344-345,348-349</small></td><td>Balón que bota con la sombra sincronizada, 1,1 s <code>infinite</code>.</td><td><span class="tag keep">INTENCIONADO</span><span class="tag adj">ACOTAR</span></td><td><b>Es literal y del tema</b> (baloncesto, Hoopline); la sombra que escala con la altura es oficio fino. La curva (.3,0,.6,1) no hace overshoot, así que no es «rebote de utilidad». Mantener, pero 3 botes y reposo; repetir al pasar el ratón. Lente: Jhey, contenido por Jakub.</td></tr>
+<tr><td><code>lft</code><br><small>global.css:346,350</small></td><td>Mancuerna sube y baja 16 px cada 1,8 s.</td><td><span class="tag keep">INTENCIONADO</span><span class="tag adj">ACOTAR</span></td><td>Mismo tratamiento que el balón: 3 ciclos + hover. Amplitud ya contenida.</td></tr>
+<tr><td><code>hrt</code><br><small>global.css:347,351</small></td><td>Corazón que late (escala 1,18) cada 1,6 s <code>infinite</code>.</td><td><span class="tag adj">ACOTAR</span> <span class="tag cut">1.º A QUITAR</span></td><td>El más prescindible: el «latido» perpetuo es el cliché de indicador de la familia. Si hay que recortar algo, es esto. Mínimo: 2 latidos y reposo. Para que no parezca ruido, mismo patrón que los demás (hover + acotado).</td></tr>
+</tbody></table></div>
+
+<h3>Resto del movimiento</h3>
+<div class="tw"><table>
+<thead><tr><th>Elemento</th><th>Frecuencia (puerta de Emil)</th><th>Veredicto</th><th>Acción</th></tr></thead>
+<tbody>
+<tr><td>Scroll suave global<br><small>global.css:31 + main.js <code>scrollTo(0,0)</code></small></td><td>Cada clic de navegación; también desde la paleta (teclado)</td><td><span class="tag cut">QUITAR</span></td><td>Medido: 566 → 0 px en ~360 ms, a la vez que la entrada de la vista. Lo iniciado con teclado no se anima (Emil). <code>scroll-behavior: auto</code>; ya no hay anclas internas que lo necesiten (todo son rutas por hash).</td></tr>
+<tr><td><code>.view</code> entrada<br><small>global.css:259</small></td><td>Ocasional-frecuente (cada cambio de vista)</td><td><span class="tag adj">AJUSTAR</span></td><td>350 ms <code>ease-out</code> genérico → 180–200 ms, curva propia, solo opacidad + 4 px. Jakub aprueba el patrón; Emil pide velocidad.</td></tr>
+<tr><td><code>.s3p</code> fundido<br><small>global.css:319</small></td><td>Cada cambio de pestaña interna</td><td><span class="tag adj">AJUSTAR</span></td><td>350 ms <code>ease</code> → 160 ms solo opacidad (sin traslación).</td></tr>
+<tr><td><code>.card:hover</code> / <code>.btn:hover</code><br><small>global.css:141,76</small></td><td>Muy frecuente (cualquier paso del ratón)</td><td><span class="tag cut">QUITAR</span> / <span class="tag adj">AJUSTAR</span></td><td>El levantado de 3 px se repite en ≥3 tipos de tarjeta, tres de ellos <b>no clicables</b> (patrón «hover-lift en todo»). Dejar reacción solo en <code>a.card</code> y sin traslación (borde/fondo). En <code>.btn</code>: añadir transición de 120 ms o eliminar el salto de 1 px.</td></tr>
+<tr><td>Hovers sin transición<br><small>.seg a, .pill, .subnav a, .ibtn, .nav a, .tl, .s3b</small></td><td>Muy frecuente</td><td><span class="tag adj">AÑADIR</span></td><td>Jakub: 120–160 ms de color/borde se perciben más pulidos que el cambio instantáneo. Más <code>:active { transform: scale(.98) }</code> en <code>.btn</code>, <code>.pill</code>, <code>.ibtn</code> (Emil).</td></tr>
+<tr><td>Paleta de comandos (abrir/cerrar)</td><td>Iniciada por teclado</td><td><span class="tag keep">MANTENER</span></td><td>Aparece sin animación: es lo correcto (Emil).</td></tr>
+<tr><td>Paquete que recorre la arista (JS, rAF)</td><td>Ocasional; explica dirección</td><td><span class="tag keep">MANTENER</span></td><td>Orienta; <code>reduce</code> ya lo desactiva (<code>main.js</code>, no se toca).</td></tr>
+<tr><td><code>.nd rect</code> transición<br><small>global.css:221</small></td><td>Cada paso del diagrama</td><td><span class="tag keep">MANTENER</span></td><td>Propiedades explícitas (fill, stroke), 250 ms: bien. Opcional: 200 ms.</td></tr>
+<tr><td>Contador de estadísticas (JS, 800 ms)</td><td>Rara vez (pestaña «What I built»)</td><td><span class="tag keep">MANTENER</span></td><td>Es un detalle ocasional (cabe en Jhey/Jakub) y respeta reduce. Añadir <code>tabular-nums</code> para que no baile el ancho.</td></tr>
+<tr><td>Barra de progreso de scroll (JS)</td><td>Continua</td><td><span class="tag adj">AJUSTAR</span></td><td>Con vistas de 900–2 800 px aporta poco; reducir de 3 a 2 px y bajar su protagonismo (no es una animación en sí).</td></tr>
+<tr><td><code>.dot</code> (halo verde)</td><td>—</td><td><span class="tag keep">YA ES ESTÁTICO</span></td><td>No se anima: bien. Ver G8 sobre su significado.</td></tr>
+<tr><td><code>prefers-reduced-motion</code></td><td>—</td><td><span class="tag ok">OK</span></td><td>Cubre vistas, pestañas, ilustraciones, pulso y scroll. Medido: 0 animaciones en ejecución. Propuesta: unificar en un solo bloque al final del CSS.</td></tr>
+</tbody></table></div>
+<p class="small">Resumen por lente — <b>Jakub:</b> el movimiento ya es sutil; falta homogeneidad (curvas por defecto, 350 ms, hovers instantáneos). <b>Emil:</b> sobra scroll suave y levantamientos en elementos de alta frecuencia; la paleta ya está bien. <b>Jhey:</b> las ilustraciones de «Off the clock» son el lugar legítimo para jugar, pero deben ser invitación (hover) y no perpetuas.</p>
+</section>
+
+<section id="referencias">
+<h2>3 · Referencias: principios, no estilos</h2>
+<p class="lead">Qué hacen animejs.com, motion.dev y manus.im con ritmo, jerarquía, microinteracciones y densidad, y qué principio es trasladable aquí. No se copia nada visual. Datos medidos en el DOM/CSS de cada página (ver límites en <a href="#metodo">Método</a>).</p>
+
+<div class="cols">
+ <div class="card"><h3>animejs.com</h3>
+ <dl class="k">
+  <dt>Ritmo</dt><dd>Cada bloque de característica mide exactamente <b>720 px</b> (un viewport); las secciones largas son múltiplos (2 880 = 4 × 720). Un módulo = un mensaje.</dd>
+  <dt>Jerarquía</dt><dd>Escala muy corta: 12 / 16 / 20 / 40–52 / 64 px; el 12 px domina (254 nodos). Dos familias: DIN y una mono.</dd>
+  <dt>Micro</dt><dd>El «chrome» casi no se mueve: transiciones de 100–125 ms solo de color/opacidad. El movimiento se gasta en las demos (116 lienzos/SVG), donde <i>explica</i> (<code>stagger</code> desde el centro, spring al soltar).</dd>
+  <dt>Densidad</dt><dd>Portada = índice: ~27 enlaces profundos, fragmentos de ≤10 líneas, peso por módulo (27,13 KB). Credibilidad técnica con cifras.</dd>
+ </dl></div>
+ <div class="card"><h3>motion.dev</h3>
+ <dl class="k">
+  <dt>Ritmo</dt><dd>Repite una fórmula: promesa corta → fragmento de 3–6 líneas → enlaces «docs / ejemplos». Bandas de texto alternan con bandas de imagen.</dd>
+  <dt>Jerarquía</dt><dd>Titulares con <b>tracking proporcional al tamaño</b> (≈ −0,035 em en 30–40 px, −0,04 em en 20 px); mono solo para código/instalación. Familia TASA Orbiter + Geist Mono.</dd>
+  <dt>Micro</dt><dd>Transiciones de 140–200 ms con curvas ease-out fuertes propias (<code>.25,1,.5,1</code>, <code>.16,1,.3,1</code>); <code>clip-path</code> a 400 ms para revelados. <b>En reposo: 0 animaciones.</b> Respeta <code>prefers-reduced-motion</code>. Skip link.</dd>
+  <dt>Densidad</dt><dd>Las demos tienen controles etiquetados con valores reales atados al código (stiffness 200, damping 18): el parámetro y su efecto, juntos.</dd>
+ </dl></div>
+ <div class="card"><h3>manus.im</h3>
+ <dl class="k">
+  <dt>Ritmo</dt><dd>Una pantalla y un pie (1 267 px de alto total, en la medición): la primera vista <i>es</i> el producto.</dd>
+  <dt>Jerarquía</dt><dd>H1 de 28 px en serif (Libre Baskerville), peso 400, formulado como pregunta; H2 de 36 px. Poco contraste de tamaño, mucho aire. Hero en blanco. El contraste de registro (serif / sans) hace el trabajo que otros dejan al color.</dd>
+  <dt>Micro</dt><dd>Solo transiciones estándar de 150–300 ms; nada se mueve en reposo.</dd>
+  <dt>Densidad</dt><dd>Hero casi vacío con chips de <i>resultados concretos</i> («Crear diapositivas», «Construir sitio web»); el pie funciona de mapa del sitio (~30 enlaces).</dd>
+ </dl></div>
+</div>
+
+<h3>Principios útiles aquí (y cómo aterrizarlos)</h3>
+<div class="tw"><table>
+<thead><tr><th>Principio</th><th>Origen</th><th>Dónde se aplicaría en este portfolio</th><th>Qué NO copiar</th></tr></thead>
+<tbody>
+<tr><td><b>Un bloque, un mensaje, una unidad de ritmo constante.</b></td><td>animejs</td><td>Definir una unidad vertical (escala de espaciado) y usar el mismo ritmo en todas las vistas; Highlights y Decisions como filas de altura natural, no cajas igualadas.</td><td>Alturas fijas de viewport (aquí hay mucho texto bilingüe).</td></tr>
+<tr><td><b>Presupuesto de movimiento:</b> chrome casi instantáneo, movimiento donde explica.</td><td>animejs + motion</td><td>Hover/foco en 120–160 ms; el movimiento «caro» queda para la traza, el diagrama y las ilustraciones. Nada se mueve en reposo.</td><td>La ausencia de <code>prefers-reduced-motion</code> en el CSS de animejs: aquí se mantiene y se unifica.</td></tr>
+<tr><td><b>Escala tipográfica corta con saltos grandes + tracking según tamaño.</b></td><td>animejs + motion</td><td>Sustituir 20 tamaños por ~8; tracking de −0,035 em en titulares grandes y 0 en cuerpo; mono solo para metadato.</td><td>Copiar sus fuentes o proporciones.</td></tr>
+<tr><td><b>Movimiento como prueba, no adorno:</b> parámetro y efecto a la vista.</td><td>motion</td><td>Diagrama de arquitectura: paso N/M, arista activa, paquete y descripción ya están; reforzar que lo activo sea lo único en acento.</td><td>Controles de física que no encajan en un portfolio.</td></tr>
+<tr><td><b>Densidad técnica como credibilidad:</b> cifras reales y peso por módulo.</td><td>animejs</td><td>Hoopline: «~150 archivos Dart · 24 módulos» y las estadísticas de «What I built» como bloque numérico protagonista (con <code>tabular-nums</code>).</td><td>Inventar métricas: las de Career siguen pendientes (README).</td></tr>
+<tr><td><b>Fórmula repetida:</b> afirmación → evidencia → enlace.</td><td>motion</td><td>Cada decisión de Hoopline: título (afirmación) → 1–2 líneas → dato. Cada tarjeta de Home: ruta → título → «Open →».</td><td>Repetir CTA comerciales (Motion+ / patrocinio).</td></tr>
+<tr><td><b>La primera pantalla es la acción o el producto, no una presentación.</b></td><td>manus</td><td>Hoopline: que la cabecera enseñe estado + enlaces en 2 columnas y suba el contenido; en Home, bajar peso al marco del retrato para que el rol y los CTA lean antes.</td><td>Un hero vacío: un portfolio necesita decir quién es en 5 segundos.</td></tr>
+<tr><td><b>Contraste de registro</b> (serif/sans, mono/sans) en vez de color para cambiar de voz.</td><td>manus + motion</td><td>Reservar DM Mono para «dato técnico» (rutas, tags, fechas) y llevar navegación y botones a Figtree: así la mono vuelve a significar algo.</td><td>Añadir una serif nueva (coste de fuente sin necesidad).</td></tr>
+<tr><td><b>Chips = ejemplos concretos de resultado.</b></td><td>manus</td><td>Los pills de flujo del diagrama («Sign up», «Place a bid»…) ya funcionan así; mantenerlos como único uso del acento relleno en esa vista.</td><td>Carruseles/tickers en bucle.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="propuesta">
+<h2>4 · Propuesta: dos direcciones</h2>
+<p class="lead">Ambas son solo CSS sobre los ganchos que ya existen (clases, ids y atributos no cambian), valen para EN/ES y claro/oscuro, mantienen <code>prefers-reduced-motion</code> y el foco, y no añaden dependencias salvo lo que se indica expresamente.</p>
+
+<h3>Base común (se haría en cualquiera de las dos)</h3>
+<pre><code>:root {
+  /* espaciado: de 29 valores sueltos a 9 pasos */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+  /* radios */
+  --r-1: 6px; --r-2: 10px; --r-3: 16px;
+
+  /* movimiento */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --d-fast: 140ms;   /* hover, foco, pulsación */
+  --d-base: 200ms;   /* entradas de vista/panel */
+  --d-slow: 320ms;   /* solo detalles raros (ilustraciones) */
+}</code></pre>
+
+<div class="grid g2">
+<article class="card" id="dir-a">
+<h3>Dirección A · «Trace, en limpio»</h3>
+<p class="small">Lente: Jakub · Emil · Jhey solo en About</p>
+<p><b>Concepto (3 líneas).</b> Un documento técnico bien escrito: la jerarquía la dan la escala, las reglas finas y el espacio, no las cajas. El naranja pasa a señalar <i>una</i> cosa por pantalla (la acción o el estado actual). La metáfora de API/traza se mantiene y se vuelve el hilo conductor (rutas, trazas, pasos).</p>
+<h4>Tipografía y escala</h4>
+<pre><code>/* misma familia; cambia el reparto de roles */
+--f-display: "Bricolage Grotesque Variable"; /* peso 800 → 650 en titulares */
+--f-body:    "Figtree Variable";             /* navegación y botones pasan aquí, 500 */
+--f-mono:    "DM Mono";                      /* solo ruta, tags, fechas, código */
+
+/* escala ≈ 1.25, base 17 (16 en móvil): 8 pasos en vez de 20 */
+--fs-xs: 12px;   --fs-sm: 14px;   --fs-base: 17px;
+--fs-md: 20px;   --fs-lg: 25px;   --fs-xl: 31px;
+--fs-2xl: clamp(1.75rem, 3.4vw, 2.5rem);          /* h2 */
+--fs-hero: clamp(2.4rem, 5vw, 4.5rem);            /* nombre */
+--track-display: -0.035em;  /* ≥ 40 px */   --track-heading: -0.02em;
+/* suelo de 12 px: desaparecen 10,5 / 11 / 11,5 */</code></pre>
+<h4>Color (tokens)</h4>
+<pre><code>/* oscuro (base actual conservada) */
+--bg:#06141F; --bg2:#0A1E2D; --surface:#0F2B3F;
+--line:#1F4660;          /* decorativa */
+--line-strong:#4A7D99;   /* bordes de control: 4,15:1 / 3,79:1 / 3,26:1 sobre bg / bg2 / surface */
+--ink:#EAF4FA; --ink-2:#C5D9E5; --muted:#8FB0C4;
+--accent:#FF9A4D; --focus:#FF9A4D;
+
+/* claro */
+--bg:#EEF5F9; --bg2:#E0ECF3; --surface:#FFFFFF;
+--line:#C4D6E2;
+--line-strong:#6C8AA0;   /* 3,30 / 3,02 / 3,63 */
+--ink:#0B2233; --ink-2:#27465A; --muted:#4D6B7F;   /* ink-2: 9,04 sobre bg */
+--accent:#F28A2E; --accent-text:#A34E00;
+--focus:#A34E00;         /* 5,23:1 (hoy 2,26:1) */
+--flow:#0A7C8C;          /* barras de traza: 4,08:1 sobre bg2 (hoy 2,08) */
+--ok:#0E7048;            /* badge: 5,56:1 */</code></pre>
+<p><b>Regla del acento (máx. 3 roles):</b> botón primario, estado actual/activo (<code>aria-selected</code>, <code>aria-current</code>, <code>aria-pressed</code>, barra «actual» de la traza) y foco en oscuro. Tags, rutas, números y viñetas pasan a <code>--ink-2</code>/<code>--muted</code>. Objetivo: de 55 usos a ≲ 20.</p>
+<h4>Espaciado y layout</h4>
+<ul class="tight">
+ <li>Ritmo con los 9 pasos; vista = 64 px arriba, 48 entre bloques, 24 de padding en componentes.</li>
+ <li>Quitar la línea doble: <code>section.view { border-top: 0 }</code>.</li>
+ <li>Pie anclado: <code>main.wrap { min-height: calc(100svh - 61px); display: flex; flex-direction: column } footer { margin-top: auto }</code> (arregla Contact).</li>
+ <li>Hero: nombre en 2 líneas (spans en línea con espacio), retrato sin marco desplazado ni resplandor (borde fino + radio 20), stack como lista mono separada por «·», «uptime» en una línea de metadatos con filete.</li>
+ <li>Punto de estado: neutro (sin verde, sin halo).</li>
+</ul>
+<h4>Tratamiento de Hoopline</h4>
+<ul class="tight">
+ <li><b>Cabecera «ficha técnica»</b>: <code>.vhead</code> en rejilla de 2 columnas a ≥960 px (izq.: ruta, título, claim · dcha.: badges y enlaces), con <code>grid-template-areas</code> sobre sus hijos actuales. Recupera unos 150 px (estimado) y el contenido empezaría hacia y≈360.</li>
+ <li><b>Subnav fija bajo la cabecera</b> (<code>position: sticky</code>; solo ≥641 px) y con degradado de borde para indicar scroll en móvil.</li>
+ <li><b>Dos niveles, dos lenguajes:</b> nivel 1 subrayado (acento = estado actual); nivel 2 (<code>.s3b</code>, <code>.slang</code>) como control segmentado neutro, sin relleno naranja.</li>
+ <li><b>Estadísticas</b> en una franja de 6 cifras con filetes verticales, sin cajas, <code>tabular-nums</code>, número en <code>--ink</code>.</li>
+ <li><b>«Built with»</b> en tags neutros; tour de código como árbol de archivos (mono, sin cajas) con detalle en superficie.</li>
+ <li><b>Arquitectura:</b> nodos con <code>--line-strong</code>; aristas vistas en <code>--flow</code>, arista y nodo activos en acento (única cosa naranja de la vista); móvil con <code>min-width: 1000px</code> (escala 1,0 → 13,5 / 10,5 px, hoy 11,1 / 8,6) y degradado de borde; subetiqueta a 12 px; revisar solapes de nodos.</li>
+ <li><b>Decisions / Highlights:</b> lista con filetes en 2 columnas, altura natural, número grande en mono tenue. Desaparecen las cajas vacías y la huérfana.</li>
+ <li><b>Screens:</b> carril de móviles con <code>scroll-snap</code>, 280 px por pieza, sin marco extra, <code>.legal</code> a 13 px.</li>
+</ul>
+<h4>Movimiento propuesto (Jakub + Emil)</h4>
+<ul class="tight">
+ <li>Hover/foco: 140 ms de color/borde; <code>:active</code> escala .98 en 90 ms.</li>
+ <li>Vista: 200 ms, opacidad + 4 px, <code>--ease-out</code>. Pestañas internas: 160 ms, solo opacidad.</li>
+ <li>Sin scroll suave. Sin elevación en tarjetas que no son enlaces; en <code>a.card</code> solo borde/fondo.</li>
+ <li><code>.pulse</code>: 3 iteraciones. Ilustraciones de About: 3 ciclos y reposo, repetibles con hover/foco (Jhey, acotado).</li>
+ <li>Un único bloque <code>@media (prefers-reduced-motion: reduce)</code> al final.</li>
+</ul>
+<h4>Riesgos</h4>
+<ul class="tight">
+ <li><b>Menos «wow» inicial.</b> Mitigación: la ficha técnica de Hoopline, la traza y el diagrama son los momentos de carácter.</li>
+ <li>Pasar de cajas a filetes <b>cambia la altura</b> de las vistas: revisar los 32 estados (EN/ES × tema × ancho) con capturas comparadas.</li>
+ <li>Dos líneas fijas (cabecera + subnav) ocupan 104 px de 844 en móvil: por eso solo la cabecera es fija ≤640 px.</li>
+ <li>Nombre en 2 líneas con <code>display:inline</code> y <code>::after</code> de espacio: verificar lectura de pantalla y copia de texto.</li>
+ <li>Coste: <b>0 KB nuevos</b>, sin dependencias.</li>
+</ul>
+</article>
+
+<article class="card" id="dir-b">
+<h3>Dirección B · «Escenario»</h3>
+<p class="small">Lente: Jakub · Jhey de apoyo ampliado</p>
+<p><b>Concepto (3 líneas).</b> Dark-first con la luz de contorno naranja del retrato como motivo de página: resplandores radiales detrás del hero y de Hoopline, tipografía enorme y asimétrica, cifras gigantes. El API/trace queda como etiquetado; el protagonismo lo toman el retrato y el producto.</p>
+<h4>Tipografía y escala</h4>
+<pre><code>/* escala ≈ 1.333, más contraste de tamaños */
+--fs-xs:13px; --fs-sm:15px; --fs-base:17px; --fs-md:22px;
+--fs-lg:30px; --fs-xl:40px; --fs-2xl:53px; --fs-hero:clamp(3rem, 8vw, 6rem);
+--track-display:-0.04em;
+/* OPCIONAL (coste): eje de tamaño óptico de Bricolage
+   @fontsource-variable/bricolage-grotesque/opsz.css
+   latin: 76,9 KB frente a 41,3 KB de wght → +35,5 KB; exige cambiar 1 import en Base.astro */</code></pre>
+<h4>Color (tokens)</h4>
+<pre><code>--bg:#040E16; --bg2:#08182A; --surface:#0E2538;
+--glow: radial-gradient(60% 50% at 82% 0%,
+         color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+--accent: #FF9A4D;  /* se usa a gran escala: panel de cifras, subrayados */
+--flow:#5CE0D6;     /* segundo acento para datos */
+/* claro: mismo fondo azul-gris, glows más tenues; contraste de texto sobre degradados
+   a verificar en el punto más claro del glow */</code></pre>
+<h4>Espaciado y layout</h4>
+<ul class="tight">
+ <li>Misma escala base de 9 pasos, con secciones más holgadas (96 px) y asimetría 7/5 en hero y Hoopline.</li>
+ <li>Retrato mayor con el resplandor como luz de contorno real (sin marco desplazado).</li>
+ <li>Tarjetas solo donde hay datos; el resto en rejilla amplia con numerales gigantes.</li>
+</ul>
+<h4>Tratamiento de Hoopline</h4>
+<ul class="tight">
+ <li><b>Escenario:</b> cabecera a ancho completo con glow, «Hoopline GM» a 96 px y cifras clave en grande al lado.</li>
+ <li><b>Límite honesto:</b> con CSS no se puede mover las capturas de la pestaña «Screens» a «Overview» (son paneles distintos del DOM). Se queda como carril grande con snap en su pestaña.</li>
+ <li>Arquitectura: fondo con malla fina; nodos con halo en el paso activo.</li>
+</ul>
+<h4>Movimiento propuesto (Jakub + Jhey)</h4>
+<ul class="tight">
+ <li>Revelados al entrar en pantalla con <code>animation-timeline: view()</code>, como mejora progresiva (<code>@supports</code>); <b>compatibilidad entre navegadores a verificar antes de adoptarlo</b>.</li>
+ <li>Parallax suave del retrato (≤ 12 px) y entrada escalonada solo en el hero.</li>
+ <li>Mismo recorte que A para scroll suave, hover-lift y bucles; <code>reduce</code> lo desactiva todo.</li>
+</ul>
+<h4>Riesgos</h4>
+<ul class="tight">
+ <li><b>Posicionamiento:</b> más «estudio creativo» que «ingeniero backend senior». Puede restar credibilidad ante quien busca rigor.</li>
+ <li>Texto sobre degradados: contraste a validar en cada combinación de tema; más QA (32 estados) y más superficie para regresiones.</li>
+ <li>Más movimiento = más riesgo de caer en patrones de «animación de plantilla» (stagger y fundidos uniformes), justo lo que la auditoría penaliza.</li>
+ <li>Rodríguez a 96 px en ES/EN: <code>clamp</code> obligatorio para 390 px.</li>
+ <li>Coste: 0 KB (solo pesos) o +35,5 KB y un cambio fuera de CSS con la fuente de tamaño óptico.</li>
+</ul>
+</article>
+</div>
+</section>
+
+<section id="recomendacion">
+<div class="rec">
+<h3>Recomendación: Dirección A («Trace, en limpio»)</h3>
+<ol class="tight">
+ <li><b>Ataca las causas, no la superficie.</b> Los problemas diagnosticados (acento en todo, tarjeta única, mono en todo, escala y espaciado sin sistema, cabecera de Hoopline pesada) se resuelven con tokens y reglas de uso; B los maquilla con luz y tamaño.</li>
+ <li><b>Encaja con quién te lee.</b> Un perfil backend senior se valora por criterio y rigor: jerarquía clara, datos reales y detalle contenido transmiten eso mejor que un escenario. Hoopline conserva su momento de carácter (ficha, diagrama, capturas).</li>
+ <li><b>Riesgo bajo para la funcionalidad:</b> solo CSS, mismos selectores, 0 KB y 0 dependencias; cabe dentro de tu alcance y es comprobable estado a estado con capturas comparadas.</li>
+ <li><b>Coherente con tu ponderación de movimiento</b> (Jakub manda, Emil apoya, Jhey acotado). B pediría subir a Jhey y añadir soporte de navegador por verificar.</li>
+ <li><b>Deja puertas abiertas:</b> si tras A quieres más presencia, se puede añadir después una sola idea de B (el resplandor de contorno en el hero) sin rehacer nada.</li>
+</ol>
+<p class="small">Orden de implementación sugerido (cada paso verificable con capturas «antes/después»): 1) tokens y reglas base sin cambio visual; 2) accesibilidad (foco, contraste, línea doble, pie); 3) componentes (tarjetas → filas, hero); 4) Hoopline; 5) movimiento. Quedan aparte, con tu aprobación, los puntos de markup/JS de la auditoría (jerarquía de <code>h1</code>, semántica de pestañas, <code>theme-color</code>, precarga de fuentes, regiones con scroll enfocables) y decidir si <code>og.png</code> debe seguir la nueva estética.</p>
+</div>
+</section>
+
+<section id="no-cambia">
+<h2>Lo que NO cambiaré (garantía de funcionalidad)</h2>
+<div class="grid g2">
+<div class="card"><h4>Lógica y datos</h4>
+<ul>
+ <li><code>src/scripts/main.js</code>: router por vistas y subvistas (<code>#view-subview</code>), tema claro/oscuro y su persistencia (<code>vlr-theme</code>, <code>vlr-lang</code>), cambio EN/ES que conserva el hash, paleta de comandos (Ctrl/⌘ K), explorador de arquitectura, traza de carrera, terminal de tests, contador de estadísticas, copiar email.</li>
+ <li><code>src/data/*</code> y <code>src/i18n/*</code>: contenido y claves intactos (EN y ES siguen en paralelo).</li>
+ <li>Rutas <code>/en/</code> y <code>/es/</code>, la redirección de <code>index.astro</code>, el esquema de hash y todos los enlaces (LinkedIn, GitHub, hooplinegm.com, App Store, PDF del CV, email).</li>
+</ul></div>
+<div class="card"><h4>Ganchos del DOM (solo se reestilizan, no se renombran)</h4>
+<ul>
+ <li>ids que usa JS: <code>#theme #palbtn #pal #pin #plist #nav #burger #progress #svg #diagram #flows #prev #next #play #stepinfo #rows #axis #range #when #detail #tout #rerun #bstats #tlist #tdetail</code>.</li>
+ <li>clases y atributos que usa o genera JS: <code>.seg a</code>, <code>.js-copy</code>, <code>.view[data-view]</code>, <code>.pane[data-pane]</code>, <code>.subnav a[data-s]</code>, <code>.s3b</code>, <code>.s3p</code>, <code>.slang</code>, <code>.shots[data-l]</code>, <code>.pill</code>, <code>.row .rl .track .bar2 .ph .tick</code>, <code>.nd .eg .pk .mk .grp .sb .pulse</code>, <code>.bstat</code>, <code>.tl</code>, <code>.pitem .pempty</code>, <code>.l .pass .todo .dim .hd</code>, y <code>[hidden]</code>, <code>aria-selected</code>, <code>aria-current</code>, <code>aria-pressed</code>.</li>
+</ul></div>
+<div class="card"><h4>Comportamiento y accesibilidad</h4>
+<ul>
+ <li>No se oculta ni se mueve contenido o controles con <code>display:none</code> (p. ej. la franja de contacto de Home se queda: contiene botones con JS).</li>
+ <li><code>prefers-reduced-motion</code> y <code>:focus-visible</code> solo se mantienen o mejoran, nunca se debilitan.</li>
+ <li>Todo cambio se valida en EN y ES (textos más largos), claro y oscuro, 390 y 1440 px.</li>
+ <li>No se añade ningún mensaje de disponibilidad laboral ni insignia de «open to work».</li>
+</ul></div>
+<div class="card"><h4>Alcance técnico</h4>
+<ul>
+ <li>Se tocarían únicamente <code>global.css</code>, estilos de componentes <code>.astro</code> y animaciones. <code>public/</code>, CV y <code>og.png</code> no se tocan.</li>
+ <li>Sin dependencias nuevas (A). B: +35,5 KB solo si se adopta la fuente de tamaño óptico, con un cambio de import fuera de CSS que requeriría tu aprobación.</li>
+ <li>Los hallazgos de markup/JS de la auditoría (<span class="tag baja">MARKUP</span> <span class="tag baja">JS</span>) no se aplican en esta fase.</li>
+</ul></div>
+</div>
+</section>
+
+<footer>
+ <p>Informe generado el 19 de octubre de 2026. Capturas en <code>design-audit/img/</code>. Ningún archivo de <code>src/</code>, <code>public/</code> ni de configuración ha sido modificado. Fuentes de las referencias: animejs.com, motion.dev y manus.im (medición de DOM/CSS en el momento de la consulta); reglas: vercel-labs/web-interface-guidelines.</p>
+</footer>
+</div>
+</body>
+</html>
