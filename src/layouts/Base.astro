@@ -26,6 +26,17 @@ const meta = {
 const site = Astro.site ?? new URL('https://vlopez.dev');
 const canonical = new URL(`/${lang}/`, site).href;
 const ogImage = new URL('/og.png', site).href;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Víctor López Rodríguez',
+  jobTitle: meta.title.split(' · ')[1],
+  url: canonical,
+  image: ogImage,
+  address: { '@type': 'PostalAddress', addressLocality: 'Madrid', addressCountry: 'ES' },
+  sameAs: ['https://www.linkedin.com/in/victor-lopez-rodriguez/', 'https://github.com/viclop1'],
+  knowsAbout: ['Node.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Supabase', 'Flutter'],
+};
 ---
 <!doctype html>
 <html lang={lang}>
@@ -37,6 +48,9 @@ const ogImage = new URL('/og.png', site).href;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     {languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(`/${l}/`, site).href} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(`/en/`, site).href} />
+    <meta name="theme-color" content="#06141F" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#EEF5F9" media="(prefers-color-scheme: light)" />
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:type" content="website" />
@@ -47,6 +61,7 @@ const ogImage = new URL('/og.png', site).href;
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
     <script is:inline>
       try { var th = localStorage.getItem('vlr-theme'); if (th) document.documentElement.setAttribute('data-theme', th); } catch (e) {}
     </script>

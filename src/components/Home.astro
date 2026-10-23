@@ -23,7 +23,7 @@ const t = getDict(lang);
         <p class="uptime"><span><Fragment set:html={t.h_uptime} /></span> <b id="uptime">11+ years</b></p>
       </div>
       <figure class="portrait">
-        <img src={portrait.src} alt="Víctor López Rodríguez" width="440" height="550">
+        <img src={portrait.src} alt="Víctor López Rodríguez" width="440" height="550" fetchpriority="high" decoding="async">
       </figure>
     </div>
     <div class="hcards">

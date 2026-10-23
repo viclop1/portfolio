@@ -41,6 +41,7 @@ const t = getDict(lang);
           <li><Fragment set:html={t.ov_f1} /></li>
           <li><Fragment set:html={t.ov_f2} /></li>
           <li><Fragment set:html={t.ov_f3} /></li>
+          <li><Fragment set:html={t.ov_f5} /></li>
           <li><Fragment set:html={t.ov_f4} /></li>
         </ul>
       </div>
@@ -89,6 +90,7 @@ const t = getDict(lang);
         <article class="card"><span class="tg">05</span><h3><Fragment set:html={t.d5h} /></h3><p><Fragment set:html={t.d5p} /></p></article>
         <article class="card"><span class="tg">06</span><h3><Fragment set:html={t.d6h} /></h3><p><Fragment set:html={t.d6p} /></p></article>
         <article class="card"><span class="tg">07</span><h3><Fragment set:html={t.d7h} /></h3><p><Fragment set:html={t.d7p} /></p></article>
+        <article class="card"><span class="tg">08</span><h3><Fragment set:html={t.d8h} /></h3><p><Fragment set:html={t.d8p} /></p></article>
       </div>
     </div>
 
@@ -103,7 +105,7 @@ const t = getDict(lang);
         <div class="shots" data-l={l} hidden={l !== lang}>
           {SCREENS.map((sc, i) => (
             <figure class="shot">
-              <img src={`/screens/${l}/${sc.id}.webp`} alt={sc.alt[lang === 'es' ? 1 : 0]} width="600" height="1300" loading="lazy" decoding="async" />
+              <img src={`/screens/${l}/${sc.id}.webp`} alt={sc.alt[lang === 'es' ? 1 : 0]} width="600" height="1304" loading="lazy" decoding="async" />
             </figure>
           ))}
         </div>
