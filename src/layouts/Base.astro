@@ -8,6 +8,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Palette from '../components/Palette.astro';
 import { languages, type Lang } from '../i18n';
+import { EMAIL } from '../data/site.js';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -26,17 +27,37 @@ const meta = {
 const site = Astro.site ?? new URL('https://vlopez.dev');
 const canonical = new URL(`/${lang}/`, site).href;
 const ogImage = new URL('/og.png', site).href;
+const personId = new URL('/#person', site).href;
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': personId,
   name: 'Víctor López Rodríguez',
   jobTitle: meta.title.split(' · ')[1],
+  description: meta.description,
   url: canonical,
   image: ogImage,
+  email: `mailto:${EMAIL}`,
+  knowsLanguage: ['es', 'en'],
   address: { '@type': 'PostalAddress', addressLocality: 'Madrid', addressCountry: 'ES' },
   sameAs: ['https://www.linkedin.com/in/victor-lopez-rodriguez/', 'https://github.com/viclop1'],
   knowsAbout: ['Node.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Supabase', 'Flutter'],
 };
+const app = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Hoopline GM',
+  applicationCategory: 'GameApplication',
+  operatingSystem: 'iOS',
+  url: 'https://hooplinegm.com',
+  downloadUrl: 'https://apps.apple.com/app/id6809042395',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  author: { '@id': personId },
+};
+
+// Optional privacy-friendly analytics (Cloudflare Web Analytics, no cookies).
+// Set PUBLIC_CF_BEACON_TOKEN at build time to enable it; see README.
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -61,7 +82,9 @@ const person = {
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
-    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(person)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(app)} />
+    {beaconToken && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: beaconToken })}></script>}
     <script is:inline>
       try { var th = localStorage.getItem('vlr-theme'); if (th) document.documentElement.setAttribute('data-theme', th); } catch (e) {}
     </script>

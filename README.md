@@ -43,6 +43,15 @@ the browser (flows of the architecture explorer, career timeline, repo tour, tes
 `src/data/` as `[en, es]` pairs. Only the command palette labels stay in `src/scripts/main.js`, through
 `t("English", "Español")`.
 
+### Analytics (optional)
+
+The site works without any tracking. To count visits without cookies, enable Cloudflare Web Analytics for
+the domain and copy its site token, then build with `PUBLIC_CF_BEACON_TOKEN=<token>` (in Cloudflare Pages
+it is a build environment variable). Without the variable nothing is added. If you turn on Web Analytics
+from the Pages dashboard instead, Cloudflare injects the beacon itself and this variable is not needed.
+
+The `<head>` also carries JSON-LD (`Person` and `SoftwareApplication`) built in `Base.astro`.
+
 ### Screenshots
 
 Images are in `public/screens/<lang>/<id>.webp`; the list and alt text are in `src/data/screenshots.js`.
