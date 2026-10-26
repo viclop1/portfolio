@@ -409,3 +409,13 @@ footer { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line);
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .btn:active, .ibtn:active, .pill:active { transform: none; }
 }
+
+/* Recommendations on the About page */
+.recs-h { font-size: 1.25rem; line-height: 1.2; margin: 64px 0 18px; }
+.quote { margin: 0; gap: 18px; }
+.quote blockquote { margin: 0; }
+.quote blockquote p { color: var(--ink-2); font-size: 16px; line-height: 1.6; }
+.quote figcaption { margin-top: auto; display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--muted); }
+.quote figcaption a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.quote figcaption a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.rnote { margin-top: 14px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }

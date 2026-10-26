@@ -31,8 +31,21 @@ const t = getDict(lang);
           <div class="fact"><span><Fragment set:html={t.fk_loc} /></span><span><Fragment set:html={t.fv_loc} /></span></div>
           <div class="fact"><span><Fragment set:html={t.fk_lang} /></span><span><Fragment set:html={t.fv_lang} /></span></div>
           <div class="fact"><span><Fragment set:html={t.fk_lead} /></span><span><Fragment set:html={t.fv_lead} /></span></div>
+          <div class="fact"><span><Fragment set:html={t.fk_edu} /></span><span><Fragment set:html={t.fv_edu} /></span></div>
         </div>
       </div>
+      <h3 class="recs-h"><Fragment set:html={t.rc_h} /></h3>
+      <div class="cards offc">
+        <figure class="card quote">
+          <blockquote><p><Fragment set:html={t.rc1q} /></p></blockquote>
+          <figcaption><a href="https://www.linkedin.com/in/artzai-san-jose/" target="_blank" rel="noopener">Artzai San José</a><span><Fragment set:html={t.rc1r} /></span></figcaption>
+        </figure>
+        <figure class="card quote">
+          <blockquote><p><Fragment set:html={t.rc2q} /></p></blockquote>
+          <figcaption><a href="https://www.linkedin.com/in/baurin-leza/" target="_blank" rel="noopener">Baurin Leza</a><span><Fragment set:html={t.rc2r} /></span></figcaption>
+        </figure>
+      </div>
+      <p class="rnote"><Fragment set:html={t.rc_note} /></p>
     </div>
 
     <div class="pane" data-pane="how" hidden>
