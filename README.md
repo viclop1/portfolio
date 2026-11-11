@@ -33,6 +33,8 @@ src/
   assets/               photos
 public/favicon.svg
 public/screens/<lang>/  App Store screenshots as WebP (en, es, fr, de)
+public/hoopline/       Hoopline GM app icon (SVG, and a 512 px PNG for JSON-LD), copied from
+                        the app repo: hoopline_gm/assets/icon/hoopline_icon.svg.html and _1024.png
 public/cv/            CV PDFs (en, es); sources in cv/
 ```
 

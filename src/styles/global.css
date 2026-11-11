@@ -292,6 +292,10 @@ footer { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line);
 .clinks { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
 .clinks .row2 { display: flex; flex-wrap: wrap; gap: 10px; }
 .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Hoopline GM app icon next to its name (the "Quinteto" mark, Nov 2026) */
+.happ { display: flex; align-items: center; gap: 0.45em; }
+.happ span { white-space: nowrap; }
+.happ img { width: 1.3em; height: 1.3em; margin-block: -0.1em; flex: none; border-radius: 22.5%; box-shadow: 0 0 0 1px var(--line); }
 .badge { font-family: var(--f-mono); font-size: 12.5px; padding: 4px 12px; border: 1px solid var(--line-strong); border-radius: 99px; color: var(--muted); }
 .badge.ok { color: var(--ok); border-color: var(--ok); }
 .hlinks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
