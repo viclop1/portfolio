@@ -55,9 +55,15 @@ export const FLOWS = [
     { a: "edge", b: "nba", en: "It pulls real players, teams and stats from balldontlie.", es: "Descarga jugadores, equipos y estadísticas reales de balldontlie." },
     { a: "nba", b: "pg", en: "The data lands in Postgres, and player ratings follow real-world performance.", es: "Los datos llegan a Postgres, y las valoraciones de los jugadores siguen su rendimiento real." }
   ]},
+  { id: "delete", en: "Delete an account", es: "Borrar una cuenta", steps: [
+    { a: "app", b: "signin", en: "On an iPhone with an Apple account, “Delete account” asks Apple's sheet once more for an authorization code.", es: "En un iPhone con cuenta de Apple, “Borrar cuenta” pide otra vez a la hoja de Apple un código de autorización." },
+    { a: "app", b: "edge", en: "The app sends the code to my apple-revoke Edge Function, which only a signed-in user can call.", es: "La app manda el código a mi Edge Function apple-revoke, que solo puede llamar un usuario con sesión." },
+    { a: "edge", b: "signin", en: "It exchanges the code for the user's tokens and revokes them, with a client secret signed (ES256) on every call, so it never expires. It retries a 5xx, never a 4xx, and logs no code or token.", es: "Canjea el código por los tokens del usuario y los revoca, con un secreto de cliente firmado (ES256) en cada llamada, así que nunca caduca. Reintenta ante un 5xx, nunca ante un 4xx, y no guarda en el log ni el código ni los tokens." },
+    { a: "app", b: "pg", en: "Then delete_own_account removes the account. Apple saying no never blocks the deletion.", es: "Después delete_own_account borra la cuenta. Que Apple diga que no nunca frena el borrado." }
+  ]},
   { id: "ship", en: "Ship a release", es: "Publicar una versión", steps: [
-    { a: "github", b: "codemagic", en: "I start the ios-release workflow on Codemagic, built from the GitHub repository.", es: "Lanzo el workflow ios-release en Codemagic, construido desde el repositorio de GitHub." },
-    { a: "codemagic", b: "asc", en: "Codemagic signs the build and uploads it to App Store Connect automatically.", es: "Codemagic firma el build y lo sube automáticamente a App Store Connect." },
-    { a: "asc", b: "asc", en: "After review, the release is published. iOS 1.0 was published on 5 October 2026.", es: "Tras la revisión, la versión se publica. La 1.0 de iOS se publicó el 5 de octubre de 2026." }
+    { a: "github", b: "codemagic", en: "I start the ios-release and android-release workflows on Codemagic, built from the GitHub repository. Each one analyzes and tests before it builds.", es: "Lanzo los workflows ios-release y android-release en Codemagic, construidos desde el repositorio de GitHub. Cada uno analiza y pasa los tests antes de compilar." },
+    { a: "codemagic", b: "asc", en: "Codemagic works out the build number, signs the iOS build and the Android app bundle, and uploads them to App Store Connect and Google Play Console.", es: "Codemagic calcula el número de build, firma el build de iOS y el app bundle de Android, y los sube a App Store Connect y a Google Play Console." },
+    { a: "asc", b: "asc", en: "After review, the release is published. iOS 1.0 was published on 5 October 2026, and Android followed on Google Play.", es: "Tras la revisión, la versión se publica. La 1.0 de iOS se publicó el 5 de octubre de 2026, y Android llegó después a Google Play." }
   ]}
 ];
